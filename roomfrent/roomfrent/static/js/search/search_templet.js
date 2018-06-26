@@ -1,4 +1,32 @@
  $(document).ready(function() {
+
+     $(document).on('click', '.contact_detail', function(e) {
+         e.preventDefault();
+         var divOwnId = $(this).parents('.clone_html_properity').find('input[name=owner_id]').val();
+         $('#get_contact').attr('data-owner-id', divOwnId);
+         $('#contact_mobile').val(' ');
+         $('#contact_detail').modal('show');
+
+     });
+
+     $("#get_contact").click(function() {
+         var getOwerId = $('#get_contact').attr('data-owner-id');
+         var csrf = document.getElementsByName("csrfmiddlewaretoken")[0].value;
+
+         $.ajax({
+             type: "POST",
+             url: "/dashboard/get_contact/",
+             data: {
+                 'owner_id': getOwerId,
+                 'csrfmiddlewaretoken': csrf 
+             },
+             success: function(responce) {
+             $('#contact_mobile').val(responce.mobile);
+             },
+         });
+
+     });
+
      $(".alert").hide();
      var input_value = document.getElementById('search_value').value;
      $('#pac-input').val(input_value);
@@ -27,13 +55,15 @@
                      var distance_float = responce[i]['distance'];
                      var distance = Math.round(parseFloat((distance_float * Math.pow(10, 2)).toFixed(2))) / Math.pow(10, 2);
                      var search_location = $('#pac-input').val();
-                     var search_locationresult = search_location.substring(0,30);
+                     var search_locationresult = search_location.substring(0, 30);
                      var image_url = responce[i]['image'];
                      var budget = responce[i]['budget'];
-                     var location = responce[i]['location'].substring(0,25);
+                     var location = responce[i]['location'].substring(0, 40);
                      var owner = responce[i]['owner'];
-                     var owner_mob = responce[i]['owner_mob'];
+                     var owner_id = responce[i]['owner_id'];
+                     var created_at = responce[i]['created_at'];
 
+                     // var owner_mob = responce[i]['owner_mob'];
 
                      $('.heading_result').text('Rooms for rent near ' + $('#pac-input').val());
                      var image_len = (image_url.match(new RegExp(",", "g")) || []).length;
@@ -52,17 +82,15 @@
                      $(".clone_html_properity:last").attr('id', this_div_id);
                      // for (s = 1; s >5; +s) {
                      //    $(".stars:last").attr('class', "stars " + this_div_id);
-                    
                      // }
-                     
-                     $("#" + this_div_id).find('.property_title').text(title);
+                     $("#" + this_div_id).find('.property_title').html("<b>" + title + "</b>");
                      $("#" + this_div_id).find('.budget').text("₹" + budget);
-                     $("#" + this_div_id).find('.owner').text("By Owner " + owner);
-                     $("#" + this_div_id).find('.owner_mobile').text("Mob: " + owner_mob);
-
-
-
-                     $("#" + this_div_id).find('.location').text(location + " " + distance + " km from " + search_locationresult);
+                     $("#" + this_div_id).find('.owner').text(owner);
+                     $("#" + this_div_id).find('.owner_id').val(owner_id);
+                     $("#" + this_div_id).find('.added-on').html(created_at);
+                     // $("#" + this_div_id).find('.owner_mobile').text("Mob: " + owner_mob);
+                     $("#" + this_div_id).find('.location_property').html("<br>" + location);
+                     $("#" + this_div_id).find('.location').html("<b>" + distance + " km</b> from " + search_locationresult);
                      // $("#" + this_div_id).find('.distance').text(distance + " km from " + $('#pac-input').val());
                      if (arr != 'None') {
                          $("#" + this_div_id).find('.pro_image').attr('src', arr);
@@ -81,8 +109,6 @@
          });
          return false;
      });
-
-
 
      var getUrlParameter = function getUrlParameter(sParam) {
          var sPageURL = decodeURIComponent(window.location.search.substring(1)),

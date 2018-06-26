@@ -14,6 +14,8 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.utils import timezone
 import googlemaps
+import os
+import string
 from django.core.files.storage import FileSystemStorage
 gmaps = googlemaps.Client(key='AIzaSyCn4KrK85eV6WY_E9KC460feVjSukKlLsw')
 
@@ -112,10 +114,10 @@ class OwnerAddProperty(LoggedInMixin,TemplateView):
         return context
     def post(self, request):
         images_file = request.FILES['images']
-        fs = FileSystemStorage()
+        fs = FileSystemStorage(location='media/properties/'+str(request.user.id))
         filename = fs.save(images_file.name, images_file)
-        
-        uploaded_file_url = fs.url(filename)
+        file_url = fs.url(filename)
+        uploaded_file_url = file_url.replace('media', 'media/properties/'+str(request.user.id))
         try:
             property_type = request.POST.get('property_type')
             property_status = request.POST.get('property_status')

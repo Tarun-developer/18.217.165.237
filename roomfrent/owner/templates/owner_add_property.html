@@ -7,21 +7,25 @@
             <div class="row has-sidebar">
                
       <h1 class="page-header">Submit your property</h1>
+              <div class="col-lg-8 col-md-7">
+                        <div class="card">
       <div class="form-container">
          <form action="/owner/owner_add_property" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
             <input id='step2' type='checkbox'>
             <input id='step3' type='checkbox'>
             <div id="part1" class="form-group">
+            
                <div class="panel panel-primary">
                   <div class="panel-heading">
-                     <h3 class="panel-title">Part 1</h3>
+                     <h3 class="panel-title">Property Details</h3>
                   </div>
                   <div class="row">
                      <div class="col-lg-6">
                         <div class="form-group">
                            <label for="property_type">Property Type</label>
-                           <select name="property_type" id="property_type" class="form-control form-control-lg ui-select">
+                       
+                           <select name="property_type" id="property_type" class="form-control form-control-lg ui-select border-input">
                               <option value="Single room">Single room</option>
                               <option value="1 BHK">1 BHK</option>
                               <option value="2 BHK">2 BHK</option>
@@ -35,7 +39,7 @@
                      <div class="col-lg-6">
                         <div class="form-group">
                            <label for="property_status">Property Status</label>
-                           <select name="property_status" id="property_status" class="form-control form-control-lg ui-select">
+                           <select name="property_status" id="property_status" class="form-control form-control-lg ui-select border-input">
                               <option value="Furnished">Furnished</option>
                               <option value="Unfurnished">Unfurnished</option>
                               <option value="Semi Furnished">Semi Furnished</option>
@@ -43,11 +47,15 @@
                         </div>
                      </div>
                   </div>
+   <div class="form-group">
+                     <label>Price</label>
+                     <input type="text" required name="price" class="border-input form-control form-control-lg" placeholder="Price ">
+                  </div>
                   <div class="row">
                      <div class="col-lg-6">
-                        <div class="form-group">
-                           <h3 class="subheadline">Additional Features</h3>
-                           <div class="btn-group btn-group" data-toggle="buttons">
+                        <div class="form-group border-input">
+                           <label>Additional Features</label>
+                           <div class="btn-group btn-group " data-toggle="buttons">
                               <input type="checkbox" name='parking' checked>
                               <span> Parking
                               </label>
@@ -59,7 +67,7 @@
                      </div>
                      <div class="col-lg-6">
                         <div class="form-group">
-                           <h3 class="subheadline">Priority preference</h3>
+                            <label>Priority preference</label>
                            <div class="btn-group btn-group" data-toggle="buttons">
                               <input type="checkbox" name='checks[]' value="1" >
                               <span> Family</span>
@@ -74,10 +82,7 @@
                         </div>
                      </div>
                   </div>
-                  <div class="form-group">
-                     <label>Price</label>
-                     <input type="text" name="price" class="form-control form-control-lg" placeholder="Price ">
-                  </div>
+
                   <div class="btn-group btn-group-lg" role="group" aria-label="...">
                      <label for='step2' id="continue-step2" class="continue">
                         <div class="btn btn-default btn-success btn-lg">Continue</div>
@@ -88,19 +93,19 @@
             <div id="part2" class="form-group">
                <div class="panel panel-primary">
                   <div class="panel-heading">
-                     <h3 class="panel-title">Part 2</h3>
+                     <h3 class="panel-title">Property Address</h3>
                   </div>
                   <div class="row">
                      <div class="col-lg-6">
                         <div class="form-group">
                            <label>Location</label>
-                           <input type="text" name="loaction" class="form-control form-control-lg" id="autocomplete" placeholder="Enter your location">
+                           <input type="text" name="loaction" class="form-control form-control-lg border-input" required id="autocomplete" placeholder="Enter your location">
                         </div>
                      </div>
                      <div class="col-lg-6">
                         <div class="form-group">
                            <label>Address/street/House No./landmark</label>
-                           <input type="text" name="address" class="form-control form-control-lg" placeholder="">
+                           <input type="text" name="address" class="form-control form-control-lg border-input" placeholder="">
                         </div>
                      </div>
                   </div>
@@ -108,13 +113,13 @@
                      <div class="col-lg-6">
                         <div class="form-group">
                            <label>City</label>
-                           <input type="text" name="city" class="form-control form-control-lg" placeholder="" id="locality">
+                           <input type="text" name="city" class="form-control form-control-lg border-input" placeholder="" id="locality">
                         </div>
                      </div>
                      <div class="col-lg-6">
                         <div class="form-group">
                            <label>State</label>
-                           <input type="text" name="state" class="form-control form-control-lg" placeholder="" id="administrative_area_level_1">
+                           <input type="text" name="state" class="form-control form-control-lg border-input" placeholder="" id="administrative_area_level_1">
                         </div>
                      </div>
                   </div>
@@ -122,13 +127,13 @@
                      <div class="col-lg-6">
                         <div class="form-group">
                            <label>Country</label>
-                           <input type="text" name="country" class="form-control form-control-lg" placeholder="" id="country">
+                           <input type="text" name="country" class="form-control form-control-lg border-input" placeholder="" id="country">
                         </div>
                      </div>
                      <div class="col-lg-6">
                         <div class="form-group">
                            <label>Zipcode</label>
-                           <input type="text" name="zip_code" class="form-control form-control-lg" placeholder="" id="postal_code">
+                           <input type="text" name="zip_code" class="form-control form-control-lg border-input" placeholder="" id="postal_code">
                         </div>
                      </div>
                   </div>
@@ -145,22 +150,19 @@
             <div id="part3" class="form-group">
                <div class="panel panel-primary">
                   <div class="panel-heading">
-                     <h3 class="panel-title">Part 3</h3>
+                     <h3 class="panel-title">Upload Photos</h3>
                   </div>
                   <div class="form-group">
-                     <h3 class="subheadline">Upload Photos</h3>
                      <div class="ui-dropzone">
                         <div class="icon"></div>
                         <div>Drag and drop images or click to upload</div>
-                        <input type="file" class="form-control form-control-lg" name="images" id="gallery" multiple>
+                        <input type="file" required class="form-control form-control-lg" name="images" id="gallery" multiple>
                      </div>
                   </div>
-                  <div class="form-group">
-                     <div class="checkbox">
-                        <input type="checkbox" id="featured">
-                        <label for="featured">Yes ‚ feature this listing. </label>
-                     </div>
-                  </div>
+  <div id="loader">
+<div id="shadow" class="loadershadow"></div>
+  <div id="box" class="loader_box"></div>
+</div>
                   <hr>
                   <!-- <div class="form-group">
                      <button type="submit" class="btn btn-lg btn-primary">Submit Property</button>
@@ -170,14 +172,15 @@
                         <div class="btn btn-default btn-primary btn-lg">Back</div>
                      </label>
                      <label class="continue">
-                     <button type="submit" class="btn btn-default btn-success btn-lg">Submit</button>
+                     <button type="submit" id="submit" class="btn btn-default btn-success btn-lg">Submit</button>
                      </label>
                   </div>
                </div>
             </div>
          </form>
       </div>
-
+      </div>
+   </div>
 
             </div>
          </div>

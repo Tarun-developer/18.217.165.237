@@ -259,62 +259,45 @@
          </div>
       </div>
       </div>
-      <!-- Contact Agent Modal -->
-      <div class="modal fade  item-badge-rightm" id="leadform" tabindex="-1" role="dialog">
-         <div class="modal-dialog" role="document">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <div class="media">
-                     <div class="media-left">
-                        <a href="property_single.html">
-                        <img src="/media/1.jpeg" class="img-rounded" width="64" alt="">
-                        </a>
-                     </div>
-                     <div class="media-body">
-                        <h4 class="media-heading">Send Message for<br>
-                           <small><a href="property_single.html">3 bed semi-detached house for sale</a></small>
-                        </h4>
-                        <ul class="list-unstyled">
-                           <li><i class="fa fa-map-marker"></i> Kirkstone Road, Middlesbrough TS3</li>
-                           <li><a href="tel:01502392905"><i class="fa fa-phone fa-fw" aria-hidden="true"></i> Call: 01502 392905</a>
-                           </li>
-                        </ul>
-                     </div>
-                  </div>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                  </button>
-               </div>
-               <div class="modal-body">
-                  <form>
-                     <div class="form-group">
-                        <label for="lead_name">Your Name</label>
-                        <input type="text" class="form-control" id="lead_name" placeholder="Your Name">
-                     </div>
-                     <div class="form-group">
-                        <label for="lead_email">Your Email</label>
-                        <input type="email" class="form-control" id="lead_email" placeholder="Your Email">
-                     </div>
-                     <div class="form-group">
-                        <label for="lead_phone">Your Telephone</label>
-                        <input type="tel" class="form-control" id="lead_phone" placeholder="Your Telephone">
-                     </div>
-                     <div class="form-group">
-                        <label for="lead_message">Message</label>
-                        <textarea rows="4" class="form-control" id="lead_message" placeholder="Please include any useful details, i.e. current status, availability for viewings, etc."></textarea>
-                     </div>
-                  </form>
-               </div>
-               <div class="modal-footer">
-                  <button type="button" class="btn btn-link" data-dismiss="modal">Cancel</button>
-                  <button type="button" class="btn btn-primary">Send Message</button>
-               </div>
-            </div>
-         </div>
-      </div>
+    
+
+
       <button class="btn btn-primary btn-circle" id="to-top"><i class="fa fa-angle-up"></i>
       </button>
       <footer id="footer" class="bg-light footer-light"></footer>
       </div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="contact_detail" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Owner contact details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+  <div class="form-group">
+    <label for="disabledInput" class="col-sm-2 control-label">Name</label>
+    <div class="col-sm-10">
+      <input class="form-control" id="contact_name" type="text" disabled>
+    </div>
+    <label for="disabledInput" class="col-sm-2 control-label">Mobile no</label>
+    <div class="col-sm-10">
+      {% csrf_token %}
+      <input class="form-control" id="contact_mobile" type="text" disabled>
+    </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" id="get_contact"  class="btn btn-primary">Show Mobile</button>
+      </div>
+    </div>
+  </div>
+</div>
       <script src="{% static 'js/search/scripts.js' %}"></script>
       <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC95eHImBVWI4SbTc3DD2zruYGcWdI6xD0&libraries=places&callback=initAutocomplete" async defer></script>
       <script language="JavaScript" type="text/javascript" src="{% static '/js/global/bootstrap.min.js' %}"></script>
@@ -335,65 +318,81 @@
                  });});
       </script>
       <script id="proerity_script" type="text/templet">
-         <div class="clone_html_properity ">
-           <div class="row">
-             <div class="col-lg-5">
-               <div class="item-image ">
-                 <a href="property_single.html">
-                   <img src="{% static '/images/no_image.jpg' %}" class="pro_image img-fluid" alt="">
-                   <div class="item-badges">
-                     <div class="item-badge-left ">Soon</div>
-                     <div class="item-badge-right">For Rent</div>
-                   </div>
-                   <div class="item-meta">
-                     <div class="item-price budget">$420,000
-                     </div>
-                   </div>
-                
-               </div>
-             </div>
-             <div class="col-lg-7">
-               <div class="item-info">
-                 <h3 class="item-title property_title"><a href="property_single.html"></a></h3>
-                 <div class="item-location location"></div><span class="distance"> </span>
-              
-                 <div class="item-details">
-                   <ul>
-                     <li>Furnished
-                     </li>
-                   </ul>
-                 </div>
-               </div>
-               <div class="row">
-                 <div class="col-md-6">
-                   <div class="added-on">Listed on 19th Feb 2017</div>
-                 </div>
-                 <div class="owner" class="col-md-6"> <a href="#" class="added-by">by Unnamed Owner</a>
-                 </div>
-               <div class="owner_mobile" class="col-md-6"> <a href="#" class="added-by"></a>
-                 </div>
 
+<div class="clone_html_properity ">
+   <div class="row">
+      <div class="col-lg-5">
+         <div class="item-image ">
+            <div class="property_image_div">
+            <a class="image_url" href=""> 
+               <img src="{% static '/images/no_image.webp' %}" class="pro_image img-fluid" alt=""> </a>
+               
+            </div>
+             <div class="item-meta">
+                  <div class="item-price budget">$420,000
+                  </div>
                </div>
-             </div>
-
-  <div class="stars">
-    <form id="star-form" action="">
-     <input class="star star-5" id="star-5-2" type="radio" name="star"/>
-      <label class="star star-5" for="star-5-2"></label>
-      <input class="star star-4" id="star-4-2" type="radio" name="star"/>
-      <label class="star star-4" for="star-4-2"></label>
-      <input class="star star-3" id="star-3-2" type="radio" name="star"/>
-      <label class="star star-3" for="star-3-2"></label>
-      <input class="star star-2" id="star-2-2" type="radio" name="star"/>
-      <label class="star star-2" for="star-2-2"></label>
-      <input class="star star-1" id="star-1-2" type="radio" name="star"/>
-      <label class="star star-1" for="star-1-2"></label> 
-    </form>
-  </div>
-           </div>
-
          </div>
+          <div class="stars">
+         <form id="star-form" action="">
+            <input class="star star-5" id="star-5-2" type="radio" name="star"/>
+            <label class="star star-5" for="star-5-2"></label>
+            <input class="star star-4" id="star-4-2" type="radio" name="star"/>
+            <label class="star star-4" for="star-4-2"></label>
+            <input class="star star-3" id="star-3-2" type="radio" name="star"/>
+            <label class="star star-3" for="star-3-2"></label>
+            <input class="star star-2" id="star-2-2" type="radio" name="star"/>
+            <label class="star star-2" for="star-2-2"></label>
+            <input class="star star-1" id="star-1-2" type="radio" name="star"/>
+            <label class="star star-1" for="star-1-2"></label> 
+         </form>
+      </div>
+      </div>
+      <div class="col-lg-7">
+         <div class="item-info" data-id="1234">
+             <input type="hidden" class="owner_id" name="owner_id" value="abc">
+            <span class="item-title property_title"></span>
+               <span class="location_property"></span>
+            <div class="item-location location">
+         </div>
+      <div class="row">
+         <div class="col-md-6">
+            <div class="Listed">Listed On: </div>
+          </div>
+         <div class="col-md-6"> 
+            <div class="added-on">19th Feb 2017</div>
+         </div>
+      </div>
+   <div class="row">
+      <div class="col-md-6">
+         <div class="by_owner">By Owner: </div>
+        
+      </div>
+      <div class="col-md-6"> 
+         <div class="owner">Unnamed</div>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-md-6"> 
+         <button type="button"  data-target="#contact_detail" class="btn btn-success contact_detail"> Contact details </button>
+      </div>
+      <div class="col-md-6">
+         <button type="button" class="btn btn-success"> Report owner  </button>
+      </div>
+   </div>
+      </div>
+   </div>
+     
+</div>
+</div>
       </script>
+<style type="text/css">
+   .pac-container:after {
+    background-image: none !important;
+    height: 0px;
+}
+</style>
+
 
    </body>
 </html>

@@ -247,10 +247,23 @@ hr.dotted {
 /*  2.  Layout
 -------------------------------------------------------------------*/
 #main {
-    background: #FFF;
+    background: #F4F3EF;
     width: 100%;
     margin-left: auto;
     margin-right: auto;
+}
+.sidebar_inner {
+    
+    border-radius: 6px;
+    box-shadow: 0 2px 2px rgba(204, 197, 185, 0.5);
+    background-color: #FFFFFF;
+    color: #252422;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+}
+div#filters {
+    margin-left: 10%;
 }
 #content {
     padding-top: 30px;

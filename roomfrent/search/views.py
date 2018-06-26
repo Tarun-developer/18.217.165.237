@@ -63,7 +63,7 @@ class HomePage(TemplateView):
 
 
         # return context
-	
+    
     # 
 
 class SearchResults(TemplateView):
@@ -106,9 +106,10 @@ class SearchResults(TemplateView):
             json['name']=str(i.name)
             json['distance']=str(i.distance_KM)
             json['budget']=str(i.budget)
-            # json['image']=str(i.image)
+            json['created_at']=str(i.created_at)
             json['location']=str(i.location)
             json['owner']=str(i.owner.user.first_name)
+            json['owner_id']=str(i.owner.user.id)
             json['owner_mob']=str(i.owner.owner_mobile)
             json['furnish']=str(i.furnish_id)
             for x in images:
@@ -127,10 +128,11 @@ class SearchResults(TemplateView):
             # database_result = Property.objects.filter(id=p_id)
             # print database_result
         return JsonResponse(all_results, safe=False)
-        
+    def get_contact(request):
+        owner_id = request.POST.get('owner_id')
+        user_details=OwnerInfo.objects.get(user_id=owner_id)
+        user_name=User.objects.get(id=owner_id)
+        return JsonResponse({'mobile':user_details.owner_mobile,'owner_name':user_name.first_name})
+    
 
-
-
-
-       
 

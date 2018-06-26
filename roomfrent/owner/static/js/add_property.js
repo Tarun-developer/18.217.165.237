@@ -1,4 +1,8 @@
 $(document).ready(function() {
+    $('#submit').on('click', function(){
+
+        $("#loader").show();
+    });
     $("#button116").click(function() {
         event.preventDefault();
         var csrf = document.getElementsByName("csrfmiddlewaretoken")[0].value;
