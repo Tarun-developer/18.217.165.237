@@ -1,4 +1,7 @@
-
+.property_image_div {
+    overflow: hidden;
+    height: 128px;
+}
 .h5, h5 {
     font-size: 1rem;
 }
@@ -17,11 +20,15 @@ img.img-thumbnail.pro_image {
 .col-md-4.image_prop {
     max-height: 136px;
 }
+.item-meta {
+    font-size: x-large;
+    font-weight: 800;
+}
 
-.item-image {
+/*.item-image {
   border: 1px solid #333;
   padding: 20px;
-}
+}*/
 .item-title.property_title {
   font-size: 24px;
 }

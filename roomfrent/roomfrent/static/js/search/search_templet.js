@@ -5,8 +5,8 @@
          var divOwnId = $(this).parents('.clone_html_properity').find('input[name=owner_id]').val();
          $('#get_contact').attr('data-owner-id', divOwnId);
          $('#contact_mobile').val(' ');
+         $('#contact_name').val(' ');
          $('#contact_detail').modal('show');
-
      });
 
      $("#get_contact").click(function() {
@@ -22,6 +22,8 @@
              },
              success: function(responce) {
              $('#contact_mobile').val(responce.mobile);
+             $('#contact_name').val(responce.owner_name);
+
              },
          });
 
@@ -94,6 +96,9 @@
                      // $("#" + this_div_id).find('.distance').text(distance + " km from " + $('#pac-input').val());
                      if (arr != 'None') {
                          $("#" + this_div_id).find('.pro_image').attr('src', arr);
+                         $("#" + this_div_id).find('.pro_image').attr('alt', arr);
+                         $("#" + this_div_id).find('.image_url').attr('href', arr);
+
                      }
                  }
 

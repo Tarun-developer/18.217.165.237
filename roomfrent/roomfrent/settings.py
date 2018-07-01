@@ -127,9 +127,10 @@ PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 STATIC_URL = '/static/'
 STATICFILE_DIR=(os.path.join(BASE_DIR, 'static/'))
-MEDIA_URL = '/media/'
+# MEDIA_URL = '/media/'
+MEDIA_URL = os.path.join(BASE_DIR,'/media/')
 # MEDIA_ROOT = '/home/ubuntu/roomforrent/roomfrent/media'
+# MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
-
 LOGIN_URL='/owner/owner_register'
 LOGIN_REDIRECT_URL='/owner/owner_register'
