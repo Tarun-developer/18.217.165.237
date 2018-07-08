@@ -113,35 +113,39 @@ class OwnerAddProperty(LoggedInMixin,TemplateView):
         context = super(OwnerAddProperty, self).get_context_data()
         return context
     def post(self, request):
-        images_file = request.FILES['images']
-        fs = FileSystemStorage(location='media/properties/'+str(request.user.id))
-        filename = fs.save(images_file.name, images_file)
-        file_url = fs.url(filename)
-        uploaded_file_url = file_url.replace('media', 'media/properties/'+str(request.user.id))
+    
         try:
+            images_file = request.FILES['images']
+            fs = FileSystemStorage(location='media/properties/'+str(request.user.id))
+            filename = fs.save(images_file.name, images_file)
+            file_url = fs.url(filename)
+            uploaded_file_url = file_url.replace('media', 'media/properties/'+str(request.user.id))
             property_type = request.POST.get('property_type')
             property_status = request.POST.get('property_status')
             loaction = request.POST.get('loaction')
             price = request.POST.get('price')
             city = request.POST.get('city')
-            family = request.POST.getlist('checks[]')
-            # print(family)
-            # if family[0]==1:
-            #     pref_obj=Preference.objects.create(family=1,girls=1,bachelor=1)
-            # if family[0]==2:
-            #     pref_obj=Preference.objects.create(family=1,girls=1,bachelor=1)
-            #     if family=='3':
-            # if property_status=='Furnished':
-            #     pref_obj=Preference.objects.create(family=1)
-            # if property_status=='Furnished':
-            #     pref_obj=Preference.objects.create(girls=1)
-            # if property_status=='Furnished':
-            pref_obj=Preference.objects.create(bachelor=1)
-       
+            preference_list = request.POST.getlist('preference[]')
+            if preference_list[0]=='4':
+                pref_obj=Preference.objects.create(family=1,girls=1,bachelor=1)
+            if preference_list[0]=='1':
+                if len(preference_list)==1:
+                    pref_obj=Preference.objects.create(family=1,girls=0,bachelor=0)
+                elif preference_list[1]=='2':
+                    pref_obj=Preference.objects.create(family=1,girls=1,bachelor=0)
+                elif preference_list[1]=='3':
+                    pref_obj=Preference.objects.create(family=1,girls=0,bachelor=1)
+            if preference_list[0]=='2':
+                if len(preference_list)==1:
+                    pref_obj=Preference.objects.create(family=0,girls=1,bachelor=0)
+                elif preference_list[1]=='3':
+                    pref_obj=Preference.objects.create(family=0,girls=1,bachelor=1)
+            if preference_list[0]=='3':
+                pref_obj=Preference.objects.create(family=0,girls=0,bachelor=1)
+
             bachelor = request.POST.get('bachelor')
             girls = request.POST.get('girls')
             result_add_query = gmaps.places(loaction)
-
             lat=result_add_query['results'][0]['geometry']['location']['lat']
             lng=result_add_query['results'][0]['geometry']['location']['lng']
             if property_status=='Furnished':

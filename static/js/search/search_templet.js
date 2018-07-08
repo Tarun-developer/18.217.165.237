@@ -55,7 +55,7 @@
              success: function(responce) {
                  $("#loader").hide();
                  var i;
-
+                 console.log(responce);
                  for (i = 0; i < responce.length; ++i) {
                      var title = responce[i]['name']
                      var distance_float = responce[i]['distance'];

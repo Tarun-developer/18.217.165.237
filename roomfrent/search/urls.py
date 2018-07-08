@@ -7,4 +7,3 @@ urlpatterns = [
         url(r'^search_results',SearchResults.as_view(),name='search_results'),
         url(r'^get_contact/$', SearchResults.get_contact),
 ]
-

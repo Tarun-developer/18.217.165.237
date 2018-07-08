@@ -112,21 +112,14 @@ class SearchResults(TemplateView):
             json['owner_id']=str(i.owner.user.id)
             json['owner_mob']=str(i.owner.owner_mobile)
             json['furnish']=str(i.furnish_id)
+            json['preference']=str(i.preference.girls) + "," + str(i.preference.family) + "," +str(i.preference.bachelor)
+
             for x in images:
                 image_url=str(x.url)
                 json['image']=image_url
             # json['image']=list(Images.objects.filter(property_id=i.id))
 
-
             all_results.append(json)
-
-        # return HttpResponse(all_results)
-           
-            # p_id = (i.id)
-            # distance['++'] = (i.distance_KM)
-            # # print p_id
-            # database_result = Property.objects.filter(id=p_id)
-            # print database_result
         return JsonResponse(all_results, safe=False)
     def get_contact(request):
         owner_id = request.POST.get('owner_id')

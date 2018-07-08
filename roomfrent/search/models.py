@@ -31,7 +31,7 @@ class Preference(models.Model):
 
 		
 class OwnerInfo(models.Model):
-	user = models.OneToOneField(User,on_delete=models.CASCADE)
+	user = models.ForeignKey(User,on_delete=models.CASCADE)
 	owner_mobile = models.CharField(max_length = 10)
 	# propertie=models.ForeignKey(Property,on_delete=models.CASCADE,blank=True,null=True)
 
@@ -53,8 +53,6 @@ class Property(models.Model):
 	lat=models.FloatField(blank=True,null=True)
 	lng=models.FloatField(blank=True,null=True)
 
-
-		
 	def __str__(self):
 		return str(str(self.name)+'  '+str(self.location))
 
