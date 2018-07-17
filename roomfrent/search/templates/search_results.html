@@ -13,10 +13,8 @@
       <link href="{% static '/css/search/style.css' %}" rel="stylesheet">
       <link href="{% static '/css/search/search_results.css' %}" rel="stylesheet">
       <link href="{% static '/css/search/5star.css' %}" rel="stylesheet">
+      <link href="{% static '/css/global/aos.css' %}" rel="stylesheet">
       <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-      <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"> -->
-
-
       <script language="JavaScript" type="text/javascript" src="{% static '/js/global/jquery.min.js' %}"></script>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <script>
@@ -35,14 +33,14 @@
   });
 </script>
    </head>
-   <body>
+   <body data-gr-c-s-loaded="true" style="transform: none; margin-top: 0px;" data-aos-easing="ease" data-aos-duration="400" data-aos-delay="0" cz-shortcut-listen="true" class="">
       <div id="main">
          <nav class="navbar navbar-expand-lg navbar-dark" id="menu">
             <div class="container">
                <a class="navbar-brand" href="/dashboard/"><span class="logo"><img src="{% static '/images/small_logo.webp' %}"/></span></a>
                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu-content" aria-controls="menu-content" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span>
                </button>
-               <div class="collapse navbar-collapse" id="menu-content">
+                 <div class="collapse navbar-collapse" id="menu-content">
                   <ul class="navbar-nav mr-auto">
                      <li class="nav-item ">
                         <a class="nav-link" href="/dashboard/">
@@ -50,19 +48,13 @@
                         </a>
                     
                      </li>
-                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Listner
-                        </a>
-                        <div class="dropdown-menu"> <a href="property_listing.html" class="dropdown-item">List View</a>
-                        </div>
-                     </li>
+                   
                      <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Owner
                         </a>
-                        <div class="dropdown-menu"> <a href="agent_list.html" class="dropdown-item">Owner List</a>
-                           <a href="agent.html" class="dropdown-item">Owner Profile</a>
+                        <div class="dropdown-menu"> <a href="/owner/owner_property" class="dropdown-item">Property List</a>
+                           <a href="/owner/owner_profile" class="dropdown-item">Owner Profile</a>
                         </div>
                      </li>
                   </ul>
@@ -70,10 +62,9 @@
                      <li class="nav-item dropdown user-account">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span class="user-image" style="background-image:url(' /media/user.webp');"></span> Hi,{{ user }}</a>
                         <div class="dropdown-menu"> <a href="/owner/" class="dropdown-item">My Profile</a>
-                           <a href="my_password.html" class="dropdown-item">Change Password</a>
-                           <a href="my_notifications.html" class="dropdown-item">Notifications</a>
-                           <a href="my_membership.html" class="dropdown-item">owner</a>
-                           <a href="my_payments.html" class="dropdown-item">Account</a>
+                           <a href="/owner/reset" class="dropdown-item">Change Password</a>
+                           <a href="/owner" class="dropdown-item">Notifications</a>
+                           <a href="/owner/owner_profile" class="dropdown-item">Account</a>
                            <a href="/owner/logout" class="dropdown-item">Logout</a>
                         </div>
                      </li>
@@ -238,10 +229,7 @@
                                        </select>
                                     </div>
                                  </div>
-                                 <div class="col-sm-6 col-md-5 col-lg-4 col-xl-3">
-                                    <div class="btn-group float-right" role="group"> <a href="property_grid.html" class="btn btn-light"><i class="fa fa-th"></i></a>  <a href="property_listing.html" class="btn btn-light active"><i class="fa fa-bars"></i></a> 
-                                    </div>
-                                 </div>
+                           
                               </div>
                            </div>
                            <div class="clearfix"></div>
@@ -291,11 +279,11 @@
       </div>
       <div class="modal-body">
   <div class="form-group">
-    <label for="disabledInput" class="col-sm-2 control-label">Name</label>
+    <label for="disabledInput" class="col-sm-6 control-label">Name</label>
     <div class="col-sm-10">
       <input class="form-control" id="contact_name" type="text" disabled>
     </div>
-    <label for="disabledInput" class="col-sm-2 control-label">Mobile no</label>
+    <label for="disabledInput" class="col-sm-6 control-label">Mobile no</label>
     <div class="col-sm-10">
       {% csrf_token %}
       <input class="form-control" id="contact_mobile" type="text" disabled>
@@ -314,8 +302,11 @@
        <script language="JavaScript" type="text/javascript" src="{% static '/js/global/jquery.sidr.min.js' %}"></script>
       <script language="JavaScript" type="text/javascript" src="{% static '/js/dashboard/dashboard.js' %}"></script>
       <script language="JavaScript" type="text/javascript" src="{% static '/js/search/search_templet.js' %}"></script>
+          <script language="JavaScript" type="text/javascript" src="{% static '/js/global/aos.js' %}"></script>
+           <script language="JavaScript" type="text/javascript" src="{% static '/js/global/theia-sticky-sidebar.min.js' %}"></script>
+           <script language="JavaScript" type="text/javascript" src="{% static '/js/global/lib.js' %}"></script>
       <script>
-   /*      $(document).ready(function() {
+         $(document).ready(function() {
                  $('#toggle-filters').sidr({
                    side: 'left',
                    displace : false,
@@ -325,7 +316,7 @@
                      AOS.refresh();
                    },
                    
-                 });}); */
+                 });}); 
       </script>
       <script id="proerity_script" type="text/templet">
 
@@ -345,16 +336,16 @@
          </div>
 
           <div class="stars">
-         <form id="star-form" action="">
-            <input class="star star-5" class="star-5-2" type="radio" name="star"/>
+         <form class="star-form[]" action="">
+            <input class="star star-5" id="star-5-2" type="radio" name="star"/>
             <label class="star star-5" for="star-5-2"></label>
-            <input class="star star-4" class="star-4-2" type="radio" name="star"/>
+            <input class="star star-4" id="star-4-2" type="radio" name="star"/>
             <label class="star star-4" for="star-4-2"></label>
-            <input class="star star-3" class="star-3-2" type="radio" name="star"/>
+            <input class="star star-3" id="star-3-2" type="radio" name="star"/>
             <label class="star star-3" for="star-3-2"></label>
-            <input class="star star-2" class="star-2-2" type="radio" name="star"/>
+            <input class="star star-2" id="star-2-2" type="radio" name="star"/>
             <label class="star star-2" for="star-2-2"></label>
-            <input class="star star-1" calss="star-1-2" type="radio" name="star"/>
+            <input class="star star-1" id="star-1-2" type="radio" name="star"/>
             <label class="star star-1" for="star-1-2"></label> 
          </form>
       </div>

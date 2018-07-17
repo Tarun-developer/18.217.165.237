@@ -1,5 +1,7 @@
-button.btn.btn-success {
-    padding: 0;
+
+span.logo img {
+    max-width: 80px;
+    height: auto;
 }
 .property_image_div {
     overflow: hidden;

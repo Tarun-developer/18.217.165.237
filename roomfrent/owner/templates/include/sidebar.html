@@ -1,0 +1,49 @@
+	{% load staticfiles %}
+	<div class="left-side-bar">
+		<div class="brand-logo">
+			<a href="/">
+				<img src="{% static 'src/images/small_logo.webp' %}" alt="/">
+			</a>
+		</div>
+		<div class="menu-block customscroll">
+			<div class="sidebar-menu">
+				<ul id="accordion-menu">
+					<li class="dropdown">
+						<a href="/owner" class="dropdown-toggle no-arrow">
+							<span class="fa fa-home"></span><span class="mtext">Home</span>
+						</a>
+					</li>
+					<li class="dropdown">
+						<a href="/owner/owner_add_property" class="dropdown-toggle no-arrow">
+							<span class="fa fa-pencil"></span><span class="mtext">Add new Property</span>
+						</a>
+					</li>
+					<li class="dropdown">
+						<a href="/owner/owner_property" class="dropdown-toggle no-arrow">
+							<span class="fa fa-table"></span><span class="mtext">Properties List</span>
+						</a>
+					</li>
+					
+					<li class="dropdown">
+						<a href="/owner/owner_profile" class="dropdown-toggle no-arrow">
+							<span class="fa fa-desktop"></span><span class="mtext"> Owner Profile </span>
+						</a>
+
+					</li>
+
+
+					<li>
+						<a href="/" class="dropdown-toggle no-arrow">
+							<span class="fa fa-comments-o"></span><span class="mtext">Chat <span class="fi-burst-new text-danger new"></span></span>
+						</a>
+					</li>
+										<li>
+						<a href="/owner/owner_sitemap" class="dropdown-toggle no-arrow">
+							<span class="fa fa-sitemap"></span><span class="mtext">Sitemap</span>
+						</a>
+					</li>
+
+				</ul>
+			</div>
+		</div>
+	</div>

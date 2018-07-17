@@ -1,205 +1,178 @@
-{% include "header.html" %}
-<div class="clearfix"></div>
-<div id="content">
-   <div class="container">
-      <div class="row justify-content-md-center">
-         <div class="col col-lg-12 col-xl-10">
-            <div class="row has-sidebar">
-               <h1 class="page-header">Submit your property</h1>
-               <div class="col-lg-8 col-md-7">
-                  <div class="card">
-                     <div class="form-container">
-                        <form action="/owner/owner_add_property" method="POST" enctype="multipart/form-data">
-                           {% csrf_token %}
-                           <input id='step2' type='checkbox'>
-                           <input id='step3' type='checkbox'>
-                           <div id="part1" class="form-group">
-                              <div class="panel panel-primary">
-                                 <div class="panel-heading">
-                                    <h3 class="panel-title">Property Details</h3>
-                                 </div>
-                                 <div class="row">
-                                    <div class="col-lg-6">
-                                       <div class="form-group">
-                                          <label for="property_type">Property Type</label>
-                                          <select name="property_type" id="property_type" class="form-control form-control-lg ui-select border-input">
-                                             <option value="Single room">Single room</option>
-                                             <option value="1 BHK">1 BHK</option>
-                                             <option value="2 BHK">2 BHK</option>
-                                             <option value="3 BHk">3 BHk</option>
-                                             <option value="Boys PG">Boys PG</option>
-                                             <option value="Girls PG">Girls PG</option>
-                                             <option value="Other">Other</option>
-                                          </select>
-                                       </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                       <div class="form-group">
-                                          <label for="property_status">Property Status</label>
-                                          <select name="property_status" id="property_status" class="form-control form-control-lg ui-select border-input">
-                                             <option value="Furnished">Furnished</option>
-                                             <option value="Unfurnished">Unfurnished</option>
-                                             <option value="Semi Furnished">Semi Furnished</option>
-                                          </select>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div class="form-group">
-                                    <label>Price</label>
-                                    <input type="text" name="price" class="border-input form-control form-control-lg" placeholder="Price ">
-                                 </div>
-                                 <div class="form-group">
-                                    <label>Priority preference</label>
-                                    <div class="col-lg-12">
-                                       <input type="checkbox" name='preference[]' value="4" checked>
-                                       <span> All</span>
-                                       <input type="checkbox" name='preference[]' value="1" >
-                                       <span> Family</span>
-                                       <input type="checkbox" name='preference[]' value="2" checked>
-                                       <span> Girls</span>
-                                         <input type="checkbox"  name='preference[]' value="3"  >
-                                       <span> Bachelor</span>
-                                    </div>
-                                 </div>
-                                 <div class="form-group border-input">
-                                    <label>Additional Features</label>
-                                    <div class="btn-group btn-group " data-toggle="buttons">
-                                       <input type="checkbox" name='parking' checked>
-                                       <span> Parking</span>
-                                       </label>
-                                       <input type="checkbox" name='Elecricty'>
-                                       <span> Elecricty Backup</span>
-                                       </label>
-                                    </div>
-                                 </div>
-                                 <div class="btn-group btn-group-lg" role="group" aria-label="...">
-                                    <label for='step2' id="continue-step2" class="continue">
-                                       <div class="btn btn-default btn-success btn-lg">Continue</div>
-                                    </label>
-                                 </div>
-                              </div>
-                           </div>
-                           <div id="part2" class="form-group">
-                              <div class="panel panel-primary">
-                                 <div class="panel-heading">
-                                    <h3 class="panel-title">Property Address</h3>
-                                 </div>
-                                 <div class="row">
-                                    <div class="col-lg-6">
-                                       <div class="form-group">
-                                          <label>Location</label>
-                                          <input type="text" name="loaction" class="form-control form-control-lg border-input " id="autocomplete" placeholder="Enter your location">
-                                       </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                       <div class="form-group">
-                                          <label>Address/street/House No./landmark</label>
-                                          <input type="text" name="address" class="form-control form-control-lg border-input" placeholder="">
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div class="row">
-                                    <div class="col-lg-6">
-                                       <div class="form-group">
-                                          <label>City</label>
-                                          <input type="text" name="city" class="form-control form-control-lg border-input" placeholder="" id="locality">
-                                       </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                       <div class="form-group">
-                                          <label>State</label>
-                                          <input type="text" name="state" class="form-control form-control-lg border-input" placeholder="" id="administrative_area_level_1">
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div class="row">
-                                    <div class="col-lg-6">
-                                       <div class="form-group">
-                                          <label>Country</label>
-                                          <input type="text" name="country" class="form-control form-control-lg border-input" placeholder="" id="country">
-                                       </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                       <div class="form-group">
-                                          <label>Zipcode</label>
-                                          <input type="text" name="zip_code" class="form-control form-control-lg border-input" placeholder="" id="postal_code">
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div class="btn-group btn-group-lg btn-group-justified" role="group" aria-label="...">
-                                    <label for='step2' id="back-step2" class="back">
-                                       <div class="btn btn-default btn-primary btn-lg" role="button">Back</div>
-                                    </label>
-                                    <label for='step3' id="continue-step3" class="continue">
-                                       <div class="btn btn-default btn-success btn-lg" role="button">Continue</div>
-                                    </label>
-                                 </div>
-                              </div>
-                           </div>
-                           <div id="part3" class="form-group">
-                              <div class="panel panel-primary">
-                                 <div class="panel-heading">
-                                    <h3 class="panel-title">Upload Photos</h3>
-                                 </div>
-                                 <div class="form-group">
-                                    <div class="ui-dropzone">
-                                       <div class="icon"></div>
-                                       <div>Drag and drop images or click to upload</div>
-                                       <input type="file" class="form-control form-control-lg" name="images" id="gallery" >
-                                    </div>
-                                 </div>
-                                 <hr>
-                                 <div class="btn-group btn-group-lg" role="group" aria-label="...">
-                                    <label for='step3' id="back-step3" class="back">
-                                       <div class="btn btn-default btn-primary btn-lg">Back</div>
-                                    </label>
-                                    <label class="continue">
-                                    <button type="submit" class="btn btn-default btn-success btn-lg">Submit</button>
-                                    </label>
-                                 </div>
-                              </div>
-                           </div>
-                        </form>
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+   <head>
+      {% include "include/head.html" %}
+   </head>
+   <body>
+      {% include "include/header.html" %}
+      {% include "include/sidebar.html" %}
+      <div class="main-container">
+         <div class="pd-ltr-20 customscroll customscroll-10-p height-100-p xs-pd-20-10">
+            <div class="min-height-200px">
+               <div class="page-header">
+                  <div class="row">
+                     <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                           <h4>Submit your property</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                           <ol class="breadcrumb">
+                              <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+                              <li class="breadcrumb-item active" aria-current="page">Add New Property</li>
+                           </ol>
+                        </nav>
                      </div>
                   </div>
                </div>
+               <!-- Default Basic Forms Start -->
+               <div class="pd-20 bg-white border-radius-4 box-shadow mb-30">
+                  <div class="clearfix">
+                     <div class="pull-left">
+                        <h4 class="text-blue">Property Details</h4>
+                        <p class="mb-30 font-14">Add new</p>
+                     </div>
+                  </div>
+                  <form action="/owner/owner_add_property" method="POST" enctype="multipart/form-data">
+                     {% csrf_token %}
+                     <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">Property Type</label>
+                        <div class="col-sm-12 col-md-10">
+                           <select name="property_type" class="custom-select col-12 property_type_select">
+                              <option value="Single room" >Single room</option>
+                              <option value="1 BHK">1 BHK</option>
+                              <option value="2 BHK">2 BHK</option>
+                              <option value="Boys PG">Boys PG</option>
+                              <option value="Girls PG">Girls PG</option>
+                              <option value="Other">Other</option>
+                           </select>
+                        </div>
+                     </div>
+                     <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">Property Status</label>
+                        <div class="col-sm-12 col-md-10">
+                           <select name="property_status" class="custom-select col-12">
+                              <option value="Furnished">Furnished</option>
+                              <option value="Unfurnished">Unfurnished</option>
+                              <option value="Semi Furnished">Semi Furnished</option>
+                           </select>
+                        </div>
+                     </div>
+                     <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">Price</label>
+                        <div class="col-sm-12 col-md-10">
+                           <input class="form-control" name="price" value="1000" type="number">
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <div class="row">
+                           <div class="col-md-6 col-sm-12">
+                              <label class="weight-600">Priority preference</label>
+                              <div class="custom-control custom-checkbox mb-5">
+                                 <input type="checkbox" class="custom-control-input" name='preference[]' value="4" id="preference1">
+                                 <label class="custom-control-label" for="preference1">All</label>
+                              </div>
+                              <div class="custom-control custom-checkbox mb-5">
+                                 <input type="checkbox" class="custom-control-input" name='preference[]' value="1" id="preference2">
+                                 <label class="custom-control-label" for="preference2">Family</label>
+                              </div>
+                              <div class="custom-control custom-checkbox mb-5">
+                                 <input type="checkbox" class="custom-control-input" name='preference[]' value="2" id="preference3">
+                                 <label class="custom-control-label" for="preference3">Girls</label>
+                              </div>
+                              <div class="custom-control custom-checkbox mb-5">
+                                 <input type="checkbox" class="custom-control-input" name='preference[]' value="3" id="preference4">
+                                 <label class="custom-control-label" for="preference4">Bachelor</label>
+                              </div>
+                           </div>
+                           <div class="col-md-6 col-sm-12">
+                              <label class="weight-600">Additional Features</label>
+                              <div class="custom-control custom-checkbox mb-5">
+                                 <input type="checkbox" class="custom-control-input" name='parking' value="1" id="customCheck1">
+                                 <label class="custom-control-label" for="customCheck1">Parking</label>
+                              </div>
+                              <div class="custom-control custom-checkbox mb-5">
+                                 <input type="checkbox" class="custom-control-input" name='Elecricty' value="2" id="customCheck2">
+                                 <label class="custom-control-label" for="customCheck2">Elecricty Backup</label>
+                              </div>
+                               <div class="custom-control custom-checkbox mb-5">
+                                 <input type="checkbox" class="custom-control-input" name='AC' value="3" id="customCheck3">
+                                 <label class="custom-control-label" for="customCheck3">AC</label>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <h4 class="text-blue">Property Address</h4>
+                     <div class="form-group row">
+                        <label class="col-sm-12 col-md-2 col-form-label">Address</label>
+                        <div class="col-sm-12 col-md-10">
+                          <button class="btn btn-secondary" onclick="initMap()" type="button"><i class="fas fa-map-marker-alt"></i></button>
+                           <input class="form-control" type="text" id="pac-input" name="loaction" placeholder="Type your Property location">
+
+                        </div>
+                     </div>
+                     <h4 class="text-blue">Property Image </h4>
+                     <div class="form-group">
+                        <label>Uplaod Property Image</label>
+                        <input type="file" name="images" class="form-control-file form-control height-auto">
+                     </div>
+                     <button type="submit" class="btn btn-success btn-lg btn-block">Submit</button>
+               </div>
+               </form>
             </div>
+            <!-- Forms End -->
          </div>
+         {% include "include/footer.html" %}
       </div>
-   </div>
-</div>
-<script>
-   var placeSearch, autocomplete;
-   var componentForm = {
-     //street_number: 'short_name',
-     //route: 'long_name',
-     locality: 'long_name',
-     administrative_area_level_1: 'long_name',
-     country: 'long_name',
-     postal_code: 'long_name'
-   };
-   
-   function initAutocomplete() {
-     autocomplete = new google.maps.places.Autocomplete((document.getElementById('autocomplete')), {types: ['geocode']});
-     autocomplete.addListener('place_changed', fillInAddress);
-   }
-   
-   function fillInAddress() {
-     var place = autocomplete.getPlace();
-     for (var component in componentForm) {
-       document.getElementById(component).value = '';
-       document.getElementById(component).disabled = false;
-     }
-     
-     for (var i = 0; i < place.address_components.length; i++) {
-       var addressType = place.address_components[i].types[0];
-       if (componentForm[addressType]) {
-         var val = place.address_components[i][componentForm[addressType]];
-         document.getElementById(addressType).value = val;
-       }
-     }
-   }
-   
-                       
-</script>
-{% include "footer.html" %}
+      </div>
+            <p id='latitudeAndLongitude'></p>
+      <p id='address'></p>
+      <script src="{% static 'vendors/scripts/script.js' %}"></script>
+       <script src="{% static 'src/scripts/address_auto_compleate.js' %}"></script>
+           <script src="{% static 'src/scripts/add_property.js' %}"></script>
+
+
+
+          <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC95eHImBVWI4SbTc3DD2zruYGcWdI6xD0&libraries=places&callback=initAutocomplete"
+         async defer></script>
+      <script>
+         function initMap(){
+              var latitudeAndLongitude=document.getElementById("latitudeAndLongitude"),
+         location={
+         latitude:'',
+         longitude:''
+         };
+         
+         if (navigator.geolocation){
+         navigator.geolocation.getCurrentPosition(showPosition);
+         }
+         else{
+         latitudeAndLongitude.innerHTML="Geolocation is not supported by this browser.";
+         }
+         }
+         function showPosition(position){ 
+         location.latitude=position.coords.latitude;
+         location.longitude=position.coords.longitude;
+         // latitudeAndLongitude.innerHTML="Latitude: " + position.coords.latitude + 
+         // "<br>Longitude: " + position.coords.longitude; 
+         var geocoder = new google.maps.Geocoder();
+         var latLng = new google.maps.LatLng(location.latitude, location.longitude);
+         
+         if (geocoder) {
+         geocoder.geocode({ 'latLng': latLng}, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+              console.log(results[0]); 
+              $('#pac-input').val(results[0].formatted_address);
+            }
+            else {
+             $('#pac-input').val('Geocoding failed: '+status);
+             console.log("Geocoding failed: " + status);
+            }
+         }); //geocoder.geocode()
+         }      
+         } //showPosition
+           
+      </script>
+   </body>
+
+</html>

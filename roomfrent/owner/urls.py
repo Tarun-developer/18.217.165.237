@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^owner_property',OwnerProperty.as_view(),name='owner_property'),
     url(r'^register',OwnerRegister.as_view(),name='register'),
     url(r'^owner_add_property',OwnerAddProperty.as_view(),name='owner_add_property'),
+    url(r'^owner_sitemap',OwnerSitemap.as_view(),name='owner_owner_sitemap'),
     url(r'^register', login_required(OwnerRegister.as_view())),
     url(r'^logout/$', OwnerRegister.logout_view),
 ]

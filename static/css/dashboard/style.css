@@ -24,7 +24,7 @@ span.search-icon button {
 }
 .search-btn button {
     padding: 15px 40px;
-    width: 18%;
+    
 }
 .search-btn button {
     padding: 16px 0;
@@ -34,7 +34,7 @@ span.search-icon button {
 }
 
 .search {
-	width: 570px;
+	width: 40%;
 	height: 28px;
 	border-top: 1px solid #bdbdbd;
 	border-bottom: 1px solid #d3d3d3;
@@ -116,4 +116,17 @@ input[type="search"]::-webkit-search-results-button,
 input[type="search"]::-webkit-search-results-decoration { display: none; }
 input[type=text]::-ms-clear {  display: none; width : 0; height: 0; }
 input[type=text]::-ms-reveal {  display: none; width : 0; height: 0; }
-	
+	#menu .navbar-brand{
+		padding:0 !important;
+	}
+span.logo img {
+    max-width: 80px;
+    height: auto;
+}
+@media only screen and (max-width: 600px) {
+	.search-btn button {
+    width: 40%;
+}
+
+
+}

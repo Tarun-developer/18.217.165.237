@@ -31,6 +31,7 @@ class OwnerDashboard(LoggedInMixin,TemplateView):
 
     def get_context_data(self, * args, ** kwargs):
         context = super(OwnerDashboard, self).get_context_data()
+        context['user'] = self.request.user.first_name
         return context
 
 class OwnerProfile(LoggedInMixin,TemplateView):
@@ -38,6 +39,14 @@ class OwnerProfile(LoggedInMixin,TemplateView):
 
     def get_context_data(self, * args, ** kwargs):
         context = super(OwnerProfile, self).get_context_data()
+        
+
+        return context
+class OwnerSitemap(LoggedInMixin,TemplateView):
+    template_name = "owner_sitemap.html"
+
+    def get_context_data(self, * args, ** kwargs):
+        context = super(OwnerSitemap, self).get_context_data()
         
 
         return context
@@ -49,8 +58,8 @@ class OwnerProperty(LoggedInMixin,TemplateView):
         context = super(OwnerProperty, self).get_context_data()
         owner=self.request.user.id
         all_prop=list(Property.objects.filter(owner_id=(owner)))
+        context['user'] = self.request.user.first_name
         context['propertys'] = all_prop
-
 
         return context
 
@@ -111,6 +120,7 @@ class OwnerAddProperty(LoggedInMixin,TemplateView):
 
     def get_context_data(self, * args, ** kwargs):
         context = super(OwnerAddProperty, self).get_context_data()
+        context['user'] = self.request.user.first_name
         return context
     def post(self, request):
     
