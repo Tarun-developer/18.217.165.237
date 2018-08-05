@@ -6,6 +6,13 @@ jQuery(document).ready(function() {
         $('.search_input').val('');
         $('.search_input').val(ip_location);
     });
+
+
+        $('.rating,.kv-gly-star,.kv-gly-heart,.kv-uni-star,.kv-uni-rook,.kv-fa,.kv-fa-heart,.kv-svg,.kv-svg-heart').on(
+                'change', function () {
+                    console.log('Rating selected: ' + $(this).val());
+                });
+   
 });
 
 function initAutocomplete() {

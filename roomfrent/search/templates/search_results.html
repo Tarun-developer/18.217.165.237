@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Room for Rent</title>
       <!-- Bootstrap -->
-       <link rel="icon" href="{% static 'images/fevi_icon_logo.ico' %}">
+      <link rel="icon" href="{% static 'images/fevi_icon_logo.ico' %}">
       <link href="https://fonts.googleapis.com/css?family=Libre+Franklin:100,200,300,400,500,700" rel="stylesheet">
       <link href="{% static '/css/global/bootstrap.min.css' %}" rel="stylesheet">
       <link href="{% static '/css/global/selectric.css' %}" rel="stylesheet">
@@ -16,22 +16,6 @@
       <link href="{% static '/css/global/aos.css' %}" rel="stylesheet">
       <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
       <script language="JavaScript" type="text/javascript" src="{% static '/js/global/jquery.min.js' %}"></script>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-121432340-1', 'auto');
-  ga('require', 'GTM-P4PDRDN');
-  ga('send', 'pageview');
-</script>
-<script>
-  (adsbygoogle = window.adsbygoogle || []).push({
-    google_ad_client: "ca-pub-3861995638755744",
-    enable_page_level_ads: true
-  });
-</script>
    </head>
    <body data-gr-c-s-loaded="true" style="transform: none; margin-top: 0px;" data-aos-easing="ease" data-aos-duration="400" data-aos-delay="0" cz-shortcut-listen="true" class="">
       <div id="main">
@@ -40,15 +24,13 @@
                <a class="navbar-brand" href="/dashboard/"><span class="logo"><img src="{% static '/images/small_logo.webp' %}"/></span></a>
                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu-content" aria-controls="menu-content" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span>
                </button>
-                 <div class="collapse navbar-collapse" id="menu-content">
+               <div class="collapse navbar-collapse" id="menu-content">
                   <ul class="navbar-nav mr-auto">
                      <li class="nav-item ">
                         <a class="nav-link" href="/dashboard/">
                         Home <span class="sr-only">(current)</span>
                         </a>
-                    
                      </li>
-                   
                      <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Owner
@@ -68,8 +50,7 @@
                            <a href="/owner/logout" class="dropdown-item">Logout</a>
                         </div>
                      </li>
-                   
-                      <li class="nav-item"><a class="nav-link nav-btn" href="/owner/owner_add_property"><span><i class="fa fa-plus" aria-hidden="true"></i> Add Property</span></a>
+                     <li class="nav-item"><a class="nav-link nav-btn" href="/owner/owner_add_property"><span><i class="fa fa-plus" aria-hidden="true"></i> Add Property</span></a>
                      </li>
                   </ul>
                </div>
@@ -82,7 +63,7 @@
                      <div class="col-lg-8">
                         <div class="form-group">
                            {% csrf_token %}
-                        <input type="hidden" id="search_value" name="search_value" value="{{ search_result }}"> 
+                           <input type="hidden" id="search_value" name="search_value" value="{{ search_result }}"> 
                            <input type="text" id="pac-input" value="" class="form-control form-control-lg" required placeholder="eg.Mohali">
                         </div>
                      </div>
@@ -96,31 +77,27 @@
                   </div>
                </div>
             </div>
-                                  <div id="loader">
-<div id="shadow" class="loadershadow"></div>
-  <div id="box" class="loader_box"></div>
-</div>
-<div class="alert alert-warning alert-dismissible fade show" role="alert">
-  
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
+            <div id="loader">
+               <div id="shadow" class="loadershadow"></div>
+               <div id="box" class="loader_box"></div>
+            </div>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
          </div>
          <div class="container">
             <div class="row justify-content-md-center">
                <div class="col col-lg-12 col-xl-10">
-                  
                   <div class="page-header">
                      <h1 class="heading_result"> </h1>
                   </div>
                </div>
             </div>
          </div>
-  
          <div id="content">
             <div class="container">
-
                <div class="row justify-content-md-center">
                   <div class="col col-lg-12 col-xl-10">
                      <div class="row has-sidebar">
@@ -229,7 +206,6 @@
                                        </select>
                                     </div>
                                  </div>
-                           
                               </div>
                            </div>
                            <div class="clearfix"></div>
@@ -257,54 +233,50 @@
          </div>
       </div>
       </div>
-    
-
-
       <button class="btn btn-primary btn-circle" id="to-top"><i class="fa fa-angle-up"></i>
       </button>
       <footer id="footer" class="bg-light footer-light"></footer>
       </div>
-
-
-
-<!-- Modal -->
-<div class="modal fade" id="contact_detail" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Owner contact details</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+      <!-- Modal -->
+      <div class="modal fade" id="contact_detail" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalLongTitle">Owner contact details</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            <div class="modal-body">
+               <div class="form-group">
+                  <label for="disabledInput" class="col-sm-6 control-label">Name</label>
+                  <div class="col-sm-10">
+                     <input class="form-control" id="contact_name" type="text" disabled>
+                  </div>
+                  <label for="disabledInput" class="col-sm-6 control-label">Mobile no</label>
+                  <div class="col-sm-10">
+                     {% csrf_token %}
+                     <input class="form-control" id="contact_mobile" type="text" disabled>
+                  </div>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" id="get_contact"  class="btn btn-primary">Show Mobile</button>
+               </div>
+            </div>
+         </div>
       </div>
-      <div class="modal-body">
-  <div class="form-group">
-    <label for="disabledInput" class="col-sm-6 control-label">Name</label>
-    <div class="col-sm-10">
-      <input class="form-control" id="contact_name" type="text" disabled>
-    </div>
-    <label for="disabledInput" class="col-sm-6 control-label">Mobile no</label>
-    <div class="col-sm-10">
-      {% csrf_token %}
-      <input class="form-control" id="contact_mobile" type="text" disabled>
-    </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" id="get_contact"  class="btn btn-primary">Show Mobile</button>
-      </div>
-    </div>
-  </div>
-</div>
       <script src="{% static 'js/search/scripts.js' %}"></script>
-      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC95eHImBVWI4SbTc3DD2zruYGcWdI6xD0&libraries=places&callback=initAutocomplete" async defer></script>
       <script language="JavaScript" type="text/javascript" src="{% static '/js/global/bootstrap.min.js' %}"></script>
-       <script language="JavaScript" type="text/javascript" src="{% static '/js/global/jquery.sidr.min.js' %}"></script>
+      <script language="JavaScript" type="text/javascript" src="{% static '/js/global/jquery.sidr.min.js' %}"></script>
+       <script language="JavaScript" type="text/javascript" src="{% static '/js/global/jquery.selectric.js' %}"></script>
       <script language="JavaScript" type="text/javascript" src="{% static '/js/dashboard/dashboard.js' %}"></script>
       <script language="JavaScript" type="text/javascript" src="{% static '/js/search/search_templet.js' %}"></script>
-          <script language="JavaScript" type="text/javascript" src="{% static '/js/global/aos.js' %}"></script>
-           <script language="JavaScript" type="text/javascript" src="{% static '/js/global/theia-sticky-sidebar.min.js' %}"></script>
-           <script language="JavaScript" type="text/javascript" src="{% static '/js/global/lib.js' %}"></script>
+      <script language="JavaScript" type="text/javascript" src="{% static '/js/global/aos.js' %}"></script>
+      <script language="JavaScript" type="text/javascript" src="{% static '/js/global/theia-sticky-sidebar.min.js' %}"></script>
+      <script language="JavaScript" type="text/javascript" src="{% static '/js/global/jquery.selectric.js' %}"></script>
+      <script language="JavaScript" type="text/javascript" src="{% static '/js/global/lib.js' %}"></script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC95eHImBVWI4SbTc3DD2zruYGcWdI6xD0&libraries=places&callback=initAutocomplete" ></script>
       <script>
          $(document).ready(function() {
                  $('#toggle-filters').sidr({
@@ -319,83 +291,81 @@
                  });}); 
       </script>
       <script id="proerity_script" type="text/templet">
-
-<div class="clone_html_properity ">
-   <div class="row">
-      <div class="col-lg-5">
-         <div class="item-image ">
-            <div class="property_image_div">
-            <a class="image_url" href=""> 
-               <img src="{% static '/images/no_image.webp' %}" class="pro_image img-fluid" alt=""> </a>
-               
-            </div>
-             <div class="item-meta">
-                  <div class="item-price budget">$420,000
+         <div class="clone_html_properity ">
+            <div class="row">
+               <div class="col-lg-5">
+                  <div class="item-image ">
+                     <div class="property_image_div">
+                     <a class="image_url" href=""> 
+                        <img src="{% static '/images/no_image.webp' %}" class="pro_image img-fluid" alt=""> </a>
+                        
+                     </div>
+                      <div class="item-meta">
+                           <div class="item-price budget">$420,000
+                           </div>
+                        </div>
+                  </div>
+         
+                   <div class="stars">
+                  <form class="star-form[]" action="">
+                     <input class="star star-5" id="star-5-2" type="radio" name="star"/>
+                     <label class="star star-5" for="star-5-2"></label>
+                     <input class="star star-4" id="star-4-2" type="radio" name="star"/>
+                     <label class="star star-4" for="star-4-2"></label>
+                     <input class="star star-3" id="star-3-2" type="radio" name="star"/>
+                     <label class="star star-3" for="star-3-2"></label>
+                     <input class="star star-2" id="star-2-2" type="radio" name="star"/>
+                     <label class="star star-2" for="star-2-2"></label>
+                     <input class="star star-1" id="star-1-2" type="radio" name="star"/>
+                     <label class="star star-1" for="star-1-2"></label> 
+                  </form>
+               </div>
+               </div>
+               <div class="col-lg-7">
+                  <div class="item-info" data-id="1234">
+                      <input type="hidden" class="owner_id" name="owner_id" value="abc">
+                     <span class="item-title property_title"></span>
+                     <span class="preference"></span>
+                        <span class="location_property"></span>
+                     <div class="item-location location">
+                  </div>
+               <div class="row">
+                  <div class="col-6 col-md-6">
+                     <div class="Listed">Listed On: </div>
+                   </div>
+                  <div class="col-6 col-md-6"> 
+                     <div class="added-on">19th Feb 2017</div>
                   </div>
                </div>
+            <div class="row">
+               <div class="col-6 col-md-6">
+                  <div class="by_owner">By Owner: </div>
+                 
+               </div>
+               <div class="col-6 col-md-6"> 
+                  <div class="owner">Unnamed</div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-6 col-md-6"> 
+                  <button type="button"  data-target="#contact_detail" class="btn btn-success contact_detail"> Contact details </button>
+               </div>
+               <div class="col-6 col-md-6">
+                  <button type="button" class="btn btn-success"> Report owner  </button>
+               </div>
+            </div>
+               </div>
+            </div>
+              
          </div>
-
-          <div class="stars">
-         <form class="star-form[]" action="">
-            <input class="star star-5" id="star-5-2" type="radio" name="star"/>
-            <label class="star star-5" for="star-5-2"></label>
-            <input class="star star-4" id="star-4-2" type="radio" name="star"/>
-            <label class="star star-4" for="star-4-2"></label>
-            <input class="star star-3" id="star-3-2" type="radio" name="star"/>
-            <label class="star star-3" for="star-3-2"></label>
-            <input class="star star-2" id="star-2-2" type="radio" name="star"/>
-            <label class="star star-2" for="star-2-2"></label>
-            <input class="star star-1" id="star-1-2" type="radio" name="star"/>
-            <label class="star star-1" for="star-1-2"></label> 
-         </form>
-      </div>
-      </div>
-      <div class="col-lg-7">
-         <div class="item-info" data-id="1234">
-             <input type="hidden" class="owner_id" name="owner_id" value="abc">
-            <span class="item-title property_title"></span>
-            <span class="preference"></span>
-               <span class="location_property"></span>
-            <div class="item-location location">
          </div>
-      <div class="row">
-         <div class="col-6 col-md-6">
-            <div class="Listed">Listed On: </div>
-          </div>
-         <div class="col-6 col-md-6"> 
-            <div class="added-on">19th Feb 2017</div>
-         </div>
-      </div>
-   <div class="row">
-      <div class="col-6 col-md-6">
-         <div class="by_owner">By Owner: </div>
-        
-      </div>
-      <div class="col-6 col-md-6"> 
-         <div class="owner">Unnamed</div>
-      </div>
-   </div>
-   <div class="row">
-      <div class="col-6 col-md-6"> 
-         <button type="button"  data-target="#contact_detail" class="btn btn-success contact_detail"> Contact details </button>
-      </div>
-      <div class="col-6 col-md-6">
-         <button type="button" class="btn btn-success"> Report owner  </button>
-      </div>
-   </div>
-      </div>
-   </div>
-     
-</div>
-</div>
+               
       </script>
-<style type="text/css">
-   .pac-container:after {
-    background-image: none !important;
-    height: 0px;
-}
-</style>
-
-
+      <style type="text/css">
+         .pac-container:after {
+         background-image: none !important;
+         height: 0px;
+         }
+      </style>
    </body>
 </html>

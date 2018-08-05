@@ -34,7 +34,7 @@ import json
 # google map api
 import googlemaps
 from datetime import datetime
-gmaps = googlemaps.Client(key='AIzaSyCn4KrK85eV6WY_E9KC460feVjSukKlLsw')
+gmaps = googlemaps.Client(key='AIzaSyC95eHImBVWI4SbTc3DD2zruYGcWdI6xD0')
 
 # from login.models import *
 utc = pytz.UTC
@@ -83,6 +83,7 @@ class SearchResults(TemplateView):
     def post(self, request):
         # print request.POST
         search_result = request.POST.get('search_query')
+
         # print search_result
         result_add_query = gmaps.places(search_result)
         # print result_add_query
