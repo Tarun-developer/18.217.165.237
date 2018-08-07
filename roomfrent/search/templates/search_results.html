@@ -14,7 +14,7 @@
       <link href="{% static '/css/search/search_results.css' %}" rel="stylesheet">
       <link href="{% static '/css/search/5star.css' %}" rel="stylesheet">
       <link href="{% static '/css/global/aos.css' %}" rel="stylesheet">
-      <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+      <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
       <script language="JavaScript" type="text/javascript" src="{% static '/js/global/jquery.min.js' %}"></script>
    </head>
    <body data-gr-c-s-loaded="true" style="transform: none; margin-top: 0px;" data-aos-easing="ease" data-aos-duration="400" data-aos-delay="0" cz-shortcut-listen="true" class="">
@@ -64,6 +64,8 @@
                         <div class="form-group">
                            {% csrf_token %}
                            <input type="hidden" id="search_value" name="search_value" value="{{ search_result }}"> 
+                            <input type="hidden" id="lat_value" name="lat_value" value="{{ lat }}"> 
+                             <input type="hidden" id="lng_value" name="lng_value" value="{{ lng }}"> 
                            <input type="text" id="pac-input" value="" class="form-control form-control-lg" required placeholder="eg.Mohali">
                         </div>
                      </div>
@@ -296,8 +298,8 @@
                <div class="col-lg-5">
                   <div class="item-image ">
                      <div class="property_image_div">
-                     <a class="image_url" href=""> 
-                        <img src="{% static '/images/no_image.webp' %}" class="pro_image img-fluid" alt=""> </a>
+                     <a class="image_url " href=""> 
+                        <img src="{% static '/images/153346979730617231.webp' %}" data-image_src="{% static '/images/small_logo.webp' %}" class="pro_image img-fluid lazy" alt=""> </a>
                         
                      </div>
                       <div class="item-meta">

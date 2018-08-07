@@ -1,6 +1,6 @@
  $(document).ready(function() {
      $('input:radio[name="star"]').change(function() {
-         alert("test");
+
      });
 
      $(document).on('click', '.contact_detail', function(e) {
@@ -42,6 +42,7 @@
              return
          }
          $("#loader").show();
+
          $('.clone_html_properity').remove();
          // event.preventDefault();
          var csrf = document.getElementsByName("csrfmiddlewaretoken")[0].value;
@@ -50,13 +51,19 @@
              url: "/dashboard/search_results/",
              data: {
                  'search_query': $('#pac-input').val(),
+                 'lat': $('#lat_value').val(),
+                 'lng': $('#lng_value').val(),
+
                  'csrfmiddlewaretoken': csrf // from form
              },
              success: function(responce) {
+                  $('#lat_value').val("");
+                   $('#lng_value').val("");
                  $("#loader").hide();
                  var i;
 
                  for (i = 0; i < responce.length; ++i) {
+
                      var title = responce[i]['name']
                      var distance_float = responce[i]['distance'];
                      var distance = Math.round(parseFloat((distance_float * Math.pow(10, 2)).toFixed(2))) / Math.pow(10, 2);
@@ -115,7 +122,8 @@
                      $("#" + this_div_id).find('.location').html("<b>" + distance + " km</b> from " + search_locationresult);
                      // $("#" + this_div_id).find('.distance').text(distance + " km from " + $('#pac-input').val());
                      if (arr != 'None') {
-                         $("#" + this_div_id).find('.pro_image').attr('src', arr);
+                         // $("#" + this_div_id).find('.pro_image').data("image_src", arr);
+                        $("#" + this_div_id).find('.pro_image').attr("data-src", arr);
                          $("#" + this_div_id).find('.pro_image').attr('alt', arr);
                          $("#" + this_div_id).find('.image_url').attr('href', arr);
 
@@ -158,3 +166,28 @@
      }
 
  });
+
+window.onscroll= function(ev){
+    lazyload();
+}
+ function lazyload(){
+    var lazyImage = document.getElementsByClassName('lazy');
+    for(var i=0; i<lazyImage.length;i++){
+        if (elementInViewport(lazyImage[i])){
+            lazyImage[i].setAttribute('src',lazyImage[i].getAttribute('data-src'));
+        }
+    }
+
+ }
+
+
+ function elementInViewport(el){
+
+var rect = el.getBoundingClientRect();
+return(
+    rect.top >=0 &&
+    rect.left >= 0 &&
+    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+    rect.right <= (window.innerWidth || document.documentElement.clickWidth)
+ );
+}

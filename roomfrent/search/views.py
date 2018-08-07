@@ -70,11 +70,12 @@ class SearchResults(TemplateView):
     template_name = "search_results.html"
     def get_context_data(self, * args, ** kwargs):
         context = super(SearchResults, self).get_context_data()
-        search_result = self.request.GET.get('search')
         # database_result = Property.objects.filter(location=search_result)
         # g = googlemap(search_result)
         # print nearby_place
-        context['search_result'] = search_result
+        context['lat'] = self.request.GET.get('lat')
+        context['lng'] = self.request.GET.get('lng')
+        context['search_result'] = self.request.GET.get('search')
         if self.request.user.is_anonymous:
             context['user'] = "Guest"
         else:
@@ -83,12 +84,15 @@ class SearchResults(TemplateView):
     def post(self, request):
         # print request.POST
         search_result = request.POST.get('search_query')
-
-        # print search_result
-        result_add_query = gmaps.places(search_result)
-        # print result_add_query
-        lat=result_add_query['results'][0]['geometry']['location']['lat']
-        lng=result_add_query['results'][0]['geometry']['location']['lng']
+        getlat= request.POST.get('lat')
+        getlng= request.POST.get('lng')
+        if getlat:
+            lat =getlat
+            lng =getlng
+        else:
+            result_add_query = gmaps.places(search_result)
+            lat=result_add_query['results'][0]['geometry']['location']['lat']
+            lng=result_add_query['results'][0]['geometry']['location']['lng']
         cursor = connection.cursor()
         query='SELECT id,( 6371 * acos(cos(radians('+str(lat)+'))* cos(radians(lat)) * cos(radians(lng) - radians('+str(lng)+')) + sin(radians('+str(lat)+')) * sin(radians(lat )))) AS distance_KM ,location,name FROM search_property HAVING distance_KM >= 0 ORDER BY distance_KM '
         # print query

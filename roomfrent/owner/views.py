@@ -17,7 +17,7 @@ import googlemaps
 import os
 import string
 from django.core.files.storage import FileSystemStorage
-gmaps = googlemaps.Client(key='AIzaSyCn4KrK85eV6WY_E9KC460feVjSukKlLsw')
+gmaps = googlemaps.Client(key='AIzaSyC95eHImBVWI4SbTc3DD2zruYGcWdI6xD0')
 
 
 # Create your views here.
@@ -156,6 +156,7 @@ class OwnerAddProperty(LoggedInMixin,TemplateView):
             bachelor = request.POST.get('bachelor')
             girls = request.POST.get('girls')
             result_add_query = gmaps.places(loaction)
+     
             lat=result_add_query['results'][0]['geometry']['location']['lat']
             lng=result_add_query['results'][0]['geometry']['location']['lng']
             if property_status=='Furnished':

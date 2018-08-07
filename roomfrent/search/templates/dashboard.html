@@ -28,6 +28,9 @@
          <form class="search-bar" action="/dashboard/search_results" method="GET">
             {% csrf_token %}
             <input id="pac-input" class="search search_input" type="text" placeholder="Search Box" autofocus required maxlength="50" name="search">
+            <input type="hidden" name="lat" id="lat">
+            <input type="hidden" name="lng" id="lng">
+
             <span class="search-icon">
             <button class="btn btn-primary " onclick="initMap()"  type="button">
             <i class="fa fa-map-marker">
@@ -68,15 +71,16 @@
          function showPosition(position){ 
          location.latitude=position.coords.latitude;
          location.longitude=position.coords.longitude;
-         // latitudeAndLongitude.innerHTML="Latitude: " + position.coords.latitude + 
-         // "<br>Longitude: " + position.coords.longitude; 
+          $('#lat').val(location.latitude);
+          $('#lng').val(location.longitude);
          var geocoder = new google.maps.Geocoder();
          var latLng = new google.maps.LatLng(location.latitude, location.longitude);
+         // console.log(latLng);
          
          if (geocoder) {
          geocoder.geocode({ 'latLng': latLng}, function (results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
-              console.log(results[0]); 
+              console.log(results); 
               $('#pac-input').val(results[0].formatted_address);
             }
             else {
