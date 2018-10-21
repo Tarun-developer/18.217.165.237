@@ -1,0 +1,39 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link href="{% static '/css/register.css' %} " rel="stylesheet" />
+      <title></title>
+          <script language="JavaScript" type="text/javascript" src="{% static '/src/scripts/jquery.min.js' %}"></script>
+   </head>
+   <body>
+      <div class="login-page">
+
+         {% if messages %}
+         <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}
+            </li>
+            {% endfor %}
+         </ul>
+         {% endif %}
+         <div class="form">
+            <form action="/owner/reactivate" class="login-form" method="POST">
+               {% csrf_token %}
+               <h3>Resend verification email</h3>
+      
+            <input type="text" required pattern="[^ @]*@[^ @]*" name="email" placeholder="E-mail" />
+               <input type="hidden" name="islogin" value="true" />
+               <button>Resend</button>
+
+            </form>
+         </div>
+      </div>
+      <script type="text/javascript">
+         $('.message a').click(function(){
+          $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+         });
+      </script>
+   </body>
+</html>

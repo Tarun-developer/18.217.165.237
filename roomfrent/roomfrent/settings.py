@@ -39,6 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'search',
     'owner',
+    'django_otp',
+    'django_otp.plugins.otp_totp',
+    'django_otp.plugins.otp_hotp',
+    'django_otp.plugins.otp_static',
+    # 'django_registration',
+    # 'email_registration',
 ]
 
 MIDDLEWARE = [
@@ -47,6 +53,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django_otp.middleware.OTPMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -79,8 +86,8 @@ WSGI_APPLICATION = 'roomfrent.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'roomforrent',
-        'USER': 'root',
+        'NAME': 'rental',
+        'USER': 'admin',
         'PASSWORD': 'M4ster@809',
         'HOST': 'localhost',
         'PORT': '',
@@ -132,3 +139,10 @@ MEDIA_URL = '/media/'
 
 LOGIN_URL='/owner/owner_register'
 LOGIN_REDIRECT_URL='/owner/owner_register'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'testmail.zip@gmail.com'
+EMAIL_HOST_PASSWORD = 'M4ster@809'
+EMAIL_PORT = 587

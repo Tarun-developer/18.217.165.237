@@ -8,6 +8,7 @@
       <!-- Bootstrap -->
       <link rel="icon" href="{% static 'images/fevi_icon_logo.ico' %}">
       <link href="https://fonts.googleapis.com/css?family=Libre+Franklin:100,200,300,400,500,700" rel="stylesheet">
+      <link href="{% static '/css/register.css' %} " rel="stylesheet" />
       <link href="{% static '/css/global/bootstrap.min.css' %}" rel="stylesheet">
       <link href="{% static '/css/global/selectric.css' %}" rel="stylesheet">
       <link href="{% static '/css/search/style.css' %}" rel="stylesheet">
@@ -51,6 +52,9 @@
                         </div>
                      </li>
                      <li class="nav-item"><a class="nav-link nav-btn" href="/owner/owner_add_property"><span><i class="fa fa-plus" aria-hidden="true"></i> Add Property</span></a>
+                     </li>
+                       </li>
+                     <li class="nav-item"><a class="nav-link nav-btn" href="/owner/owner_add_property" data-toggle="modal" data-target="#modalLRForm" ><span><i class="fa fa-plus" aria-hidden="true"></i> LogIn/Register</span></a>
                      </li>
                   </ul>
                </div>
@@ -237,37 +241,136 @@
       </div>
       <button class="btn btn-primary btn-circle" id="to-top"><i class="fa fa-angle-up"></i>
       </button>
+
+
+
+
       <footer id="footer" class="bg-light footer-light"></footer>
       </div>
-      <!-- Modal -->
-      <div class="modal fade" id="contact_detail" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-         <div class="modal-content">
-            <div class="modal-header">
-               <h5 class="modal-title" id="exampleModalLongTitle">Owner contact details</h5>
-               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-               <span aria-hidden="true">&times;</span>
-               </button>
+      
+<!--Modal: Login / Register Form-->
+<div class="modal fade" id="modalLRForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog cascading-modal" role="document">
+      <!--Content-->
+      <div class="modal-content">
+         <div class="login-page-model">
+            {% if messages %}
+            <ul class="messages">
+               {% for message in messages %}
+               <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}
+               </li>
+               {% endfor %}
+            </ul>
+            {% endif %}
+            <div class="form">
+               <form action="/owner/register" class="register-form" method="POST">
+                  {% csrf_token %}
+                  <h3>Sign Up for Free</h3>
+                  <input type="text" required name="first_name" placeholder="Name" autocomplete="off" />
+                  <input type="text" required  name="moblie" placeholder="Mobile Number" autocomplete="off" />
+                  <input type="text" required pattern="[^ @]*@[^ @]*" name="email" placeholder="E-mail" />
+                  <input type="password" required name="password" placeholder="Password" autocomplete="off" />
+                  <button>create</button>
+                  <p class="message"> <b>Already registered? </b><a href="#">Sign In</a></p>
+               </form>
+               <form action="/owner/register" class="login-form" method="POST">
+                  {% csrf_token %}
+                  <h3>Welcome Back!</h3>
+                  <input type="text" name="moblie" placeholder="Mobile Number" />
+                  <input type="password" name="password" placeholder="Password" />
+                  <input type="hidden" name="islogin" value="true" />
+                  <button>login</button>
+                  <p class="message">Not registered? <a href="#">Create an account</a></p>
+               </form>
             </div>
-            <div class="modal-body">
-               <div class="form-group">
-                  <label for="disabledInput" class="col-sm-6 control-label">Name</label>
-                  <div class="col-sm-10">
-                     <input class="form-control" id="contact_name" type="text" disabled>
+         </div>
+         <script type="text/javascript">
+            $('.message a').click(function(){
+             $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+            });
+         </script>
+      </div>
+      <!--/.Content-->
+   </div>
+</div>
+
+<!--Modal: Login / Register Form-->
+<div class="modal fade" id="forgot_modol" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog cascading-modal" role="document">
+   <!--Content-->
+   <div class="modal-content">
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <div class="tab-content">
+         <div class="modal-c-tabs">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs md-tabs tabs-2 light-blue darken-3" role="tablist">
+               <li class="nav-item">
+                  <a class="nav-link active" data-toggle="tab" href="#panel7" role="tab"><i class="fa fa-user mr-1"></i>Login</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#panel8" role="tab"><i class="fa fa-user-plus mr-1"></i>Register</a>
+               </li>
+            </ul>
+            <!--Panel 7-->
+            <div class="tab-pane fade in show active" id="forgot" role="tabpanel">
+               <!--Body-->
+               <form action="/owner/forgot" class="login-form" method="POST">
+                  {% csrf_token %}
+                  <div class="modal-body mb-1">
+                     <div class="md-form form-sm mb-5">
+                        <i class="fa fa-envelope prefix"></i>
+                        <input type="text" id="modalLRInput10" name="email" class="form-control form-control-sm validate">
+                        <label data-error="wrong" data-success="right" for="modalLRInput10">Email</label>
+                     </div>
+                     <div class="text-center mt-2">
+                        <button class="btn btn-info">Reset password<i class="fa fa-sign-in ml-1"></i></button>
+                     </div>
                   </div>
-                  <label for="disabledInput" class="col-sm-6 control-label">Mobile no</label>
-                  <div class="col-sm-10">
-                     {% csrf_token %}
-                     <input class="form-control" id="contact_mobile" type="text" disabled>
-                  </div>
-               </div>
+               </form>
+               <!--Footer-->
                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" id="get_contact"  class="btn btn-primary">Show Mobile</button>
+                  <div class="options text-center text-md-right mt-1">
+                     <p>Login <a href="" class="blue-text">Login </a></p>
+                     <p>Forgot <a href="/owner/forgot/" class="blue-text">Password?</a></p>
+                  </div>
+                  <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">Close</button>
                </div>
             </div>
          </div>
       </div>
+   </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="contact_detail" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document">
+   <div class="modal-content">
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <div class="modal-header">
+         <h5 class="modal-title" id="exampleModalLongTitle">Owner contact details</h5>
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+         </button>
+      </div>
+      <div class="modal-body">
+         <div class="form-group">
+            <label for="disabledInput" class="col-sm-6 control-label">Name</label>
+            <div class="col-sm-10">
+               <input class="form-control" id="contact_name" type="text" disabled>
+            </div>
+            <label for="disabledInput" class="col-sm-6 control-label">Mobile no</label>
+            <div class="col-sm-10">
+               {% csrf_token %}
+               <input class="form-control" id="contact_mobile" type="text" disabled>
+            </div>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" id="get_contact"  class="btn btn-primary">Show Mobile</button>
+         </div>
+      </div>
+   </div>
+</div>
+
       <script src="{% static 'js/search/scripts.js' %}"></script>
       <script language="JavaScript" type="text/javascript" src="{% static '/js/global/bootstrap.min.js' %}"></script>
       <script language="JavaScript" type="text/javascript" src="{% static '/js/global/jquery.sidr.min.js' %}"></script>
@@ -371,3 +474,5 @@
       </style>
    </body>
 </html>
+
+

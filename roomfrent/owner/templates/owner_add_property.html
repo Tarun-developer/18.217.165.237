@@ -1,178 +1,185 @@
 {% load staticfiles %}
 <!DOCTYPE html>
 <html>
-   <head>
-      {% include "include/head.html" %}
-   </head>
-   <body>
-      {% include "include/header.html" %}
-      {% include "include/sidebar.html" %}
-      <div class="main-container">
-         <div class="pd-ltr-20 customscroll customscroll-10-p height-100-p xs-pd-20-10">
-            <div class="min-height-200px">
-               <div class="page-header">
-                  <div class="row">
-                     <div class="col-md-6 col-sm-12">
-                        <div class="title">
-                           <h4>Submit your property</h4>
-                        </div>
-                        <nav aria-label="breadcrumb" role="navigation">
-                           <ol class="breadcrumb">
-                              <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                              <li class="breadcrumb-item active" aria-current="page">Add New Property</li>
-                           </ol>
-                        </nav>
-                     </div>
-                  </div>
-               </div>
-               <!-- Default Basic Forms Start -->
-               <div class="pd-20 bg-white border-radius-4 box-shadow mb-30">
-                  <div class="clearfix">
-                     <div class="pull-left">
-                        <h4 class="text-blue">Property Details</h4>
-                        <p class="mb-30 font-14">Add new</p>
-                     </div>
-                  </div>
-                  <form action="/owner/owner_add_property" method="POST" enctype="multipart/form-data">
-                     {% csrf_token %}
-                     <div class="form-group row">
-                        <label class="col-sm-12 col-md-2 col-form-label">Property Type</label>
-                        <div class="col-sm-12 col-md-10">
-                           <select name="property_type" class="custom-select col-12 property_type_select">
-                              <option value="Single room" >Single room</option>
-                              <option value="1 BHK">1 BHK</option>
-                              <option value="2 BHK">2 BHK</option>
-                              <option value="Boys PG">Boys PG</option>
-                              <option value="Girls PG">Girls PG</option>
-                              <option value="Other">Other</option>
-                           </select>
-                        </div>
-                     </div>
-                     <div class="form-group row">
-                        <label class="col-sm-12 col-md-2 col-form-label">Property Status</label>
-                        <div class="col-sm-12 col-md-10">
-                           <select name="property_status" class="custom-select col-12">
-                              <option value="Furnished">Furnished</option>
-                              <option value="Unfurnished">Unfurnished</option>
-                              <option value="Semi Furnished">Semi Furnished</option>
-                           </select>
-                        </div>
-                     </div>
-                     <div class="form-group row">
-                        <label class="col-sm-12 col-md-2 col-form-label">Price</label>
-                        <div class="col-sm-12 col-md-10">
-                           <input class="form-control" name="price" value="1000" type="number">
-                        </div>
-                     </div>
-                     <div class="form-group">
-                        <div class="row">
-                           <div class="col-md-6 col-sm-12">
-                              <label class="weight-600">Priority preference</label>
-                              <div class="custom-control custom-checkbox mb-5">
-                                 <input type="checkbox" class="custom-control-input" name='preference[]' value="4" id="preference1">
-                                 <label class="custom-control-label" for="preference1">All</label>
-                              </div>
-                              <div class="custom-control custom-checkbox mb-5">
-                                 <input type="checkbox" class="custom-control-input" name='preference[]' value="1" id="preference2">
-                                 <label class="custom-control-label" for="preference2">Family</label>
-                              </div>
-                              <div class="custom-control custom-checkbox mb-5">
-                                 <input type="checkbox" class="custom-control-input" name='preference[]' value="2" id="preference3">
-                                 <label class="custom-control-label" for="preference3">Girls</label>
-                              </div>
-                              <div class="custom-control custom-checkbox mb-5">
-                                 <input type="checkbox" class="custom-control-input" name='preference[]' value="3" id="preference4">
-                                 <label class="custom-control-label" for="preference4">Bachelor</label>
-                              </div>
-                           </div>
-                           <div class="col-md-6 col-sm-12">
-                              <label class="weight-600">Additional Features</label>
-                              <div class="custom-control custom-checkbox mb-5">
-                                 <input type="checkbox" class="custom-control-input" name='parking' value="1" id="customCheck1">
-                                 <label class="custom-control-label" for="customCheck1">Parking</label>
-                              </div>
-                              <div class="custom-control custom-checkbox mb-5">
-                                 <input type="checkbox" class="custom-control-input" name='Elecricty' value="2" id="customCheck2">
-                                 <label class="custom-control-label" for="customCheck2">Elecricty Backup</label>
-                              </div>
-                               <div class="custom-control custom-checkbox mb-5">
-                                 <input type="checkbox" class="custom-control-input" name='AC' value="3" id="customCheck3">
-                                 <label class="custom-control-label" for="customCheck3">AC</label>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <h4 class="text-blue">Property Address</h4>
-                     <div class="form-group row">
-                        <label class="col-sm-12 col-md-2 col-form-label">Address</label>
-                        <div class="col-sm-12 col-md-10">
-                          <button class="btn btn-secondary" onclick="initMap()" type="button"><i class="fas fa-map-marker-alt"></i></button>
-                           <input class="form-control" type="text" id="pac-input" name="loaction" placeholder="Type your Property location">
 
-                        </div>
-                     </div>
-                     <h4 class="text-blue">Property Image </h4>
-                     <div class="form-group">
-                        <label>Uplaod Property Image</label>
-                        <input type="file" name="images" class="form-control-file form-control height-auto">
-                     </div>
-                     <button type="submit" class="btn btn-success btn-lg btn-block">Submit</button>
-               </div>
-               </form>
+<head>
+  {% include "include/head.html" %}
+</head>
+
+<body>
+  {% include "include/header.html" %}
+  {% include "include/sidebar.html" %}
+  <div class="main-container">
+    <div class="pd-ltr-20 customscroll customscroll-10-p height-100-p xs-pd-20-10">
+      <div class="min-height-200px">
+        <div class="page-header">
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="title">
+                <h4>Submit your property</h4>
+              </div>
+              <nav aria-label="breadcrumb" role="navigation">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item">
+                    <a href="index.php">Home</a>
+                  </li>
+                  <li class="breadcrumb-item active" aria-current="page">Add New Property</li>
+                </ol>
+              </nav>
             </div>
-            <!-- Forms End -->
-         </div>
-         {% include "include/footer.html" %}
+          </div>
+        </div>
+        <!-- Default Basic Forms Start -->
+        <div class="pd-20 bg-white border-radius-4 box-shadow mb-30">
+          <div class="clearfix">
+            <div class="pull-left">
+              <h4 class="text-blue">Property Details</h4>
+              <p class="mb-30 font-14">Add new</p>
+            </div>
+          </div>
+          <form action="/owner/owner_add_property" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group row">
+              <label class="col-sm-12 col-md-2 col-form-label">Property Type</label>
+              <div class="col-sm-12 col-md-10">
+                <select name="property_type" class="custom-select col-12 property_type_select">
+                  {% for p in property_type %}
+                  <option value="{{ p.name }}">{{ p.name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-12 col-md-2 col-form-label">Property Status</label>
+              <div class="col-sm-12 col-md-10">
+                <select name="property_status" class="custom-select col-12">
+                    {% for p in property_status %}
+                  <option value="{{ p.id }}">{{ p.name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-12 col-md-2 col-form-label">Price</label>
+              <div class="col-sm-12 col-md-10">
+                <input class="form-control" name="price" value="1000" type="number"></div>
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-md-6 col-sm-12">
+                  <label class="weight-600">Priority preference</label>
+                  <!-- <div class="custom-control custom-checkbox mb-5">
+                      <input type="checkbox" class="custom-control-input" name='preference[]'   value="4" id="preference1">
+                      <label class="custom-control-label" for="preference1">All</label>
+                    </div> -->
+                  {% for p in preference %}
+                 <div class="custom-control custom-checkbox mb-5">
+                    <input type="checkbox" class="custom-control-input" name='preference[]' value="{{ p.id }}" id="preference{{ p.id }}">
+                    <label class="custom-control-label" for="preference{{ p.id }}">{{ p.preference }}</label>
+                  </div>
+                  {% endfor %}
+                </div>
+                <div class="col-md-6 col-sm-12">
+                  <label class="weight-600">Additional Features</label>
+                  {% for a in additional_features %}
+               
+                  <div class="custom-control custom-checkbox mb-5">
+                    <input type="checkbox" class="custom-control-input" name='additional_features[]' value="{{ a.id }}" id="add_feature{{ a.id }}">
+                    <label class="custom-control-label" for="add_feature{{ a.id }}">{{ a.name }}</label>
+                  </div>
+                  {% endfor %}
+               
+                </div>
+              </div>
+            </div>
+            <h4 class="text-blue">Property Address</h4>
+            <div class="form-group row">
+              <label class="col-sm-12 col-md-2 col-form-label">Address</label>
+              <div class="col-sm-12 col-md-10">
+                <button class="btn btn-secondary" onclick="initMap()" type="button">
+                  <i class="fas fa-map-marker-alt"></i>
+                </button>
+                <input class="form-control" type="text" id="pac-input" name="loaction" placeholder="Type your Property location"></div>
+              <input class="form-control" hidden id="lat_lng" name="lat_lng">
+            </div>
+
+        </div>
+        <button type="submit" class="btn btn-success btn-lg btn-block">Submit</button>
       </div>
-      </div>
-            <p id='latitudeAndLongitude'></p>
-      <p id='address'></p>
-      <script src="{% static 'vendors/scripts/script.js' %}"></script>
-       <script src="{% static 'src/scripts/address_auto_compleate.js' %}"></script>
-           <script src="{% static 'src/scripts/add_property.js' %}"></script>
+      </form>
+    </div>
+    <!-- Forms End -->
+  </div>
+  {% include "include/footer.html" %}
+  </div>
+  </div>
+  <p id='latitudeAndLongitude'></p>
+  <p id='address'></p>
+  <script src="{% static 'vendors/scripts/script.js' %}"></script>
+  <script src="{% static 'src/scripts/address_auto_compleate.js' %}"></script>
+  <script src="{% static 'src/scripts/add_property.js' %}"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC95eHImBVWI4SbTc3DD2zruYGcWdI6xD0&libraries=places&callback=initAutocomplete"
+    async="async" defer="defer"></script>
+  <script>
+    function initMap() {
+      var latitudeAndLongitude = document.getElementById("latitudeAndLongitude"),
+        location = {
+          latitude: '',
+          longitude: ''
+        };
 
+      if (navigator.geolocation) {
+        navigator
+          .geolocation
+          .getCurrentPosition(showPosition);
+      } else {
+        latitudeAndLongitude.innerHTML = "Geolocation is not supported by this browser.";
+      }
+    }
+    function showPosition(position) {
+      location.latitude = position.coords.latitude;
+      location.longitude = position.coords.longitude;
+      $("#lat_lng").val(location.latitude + "," + location.longitude);
+      var geocoder = new google
+        .maps
+        .Geocoder();
+      var latLng = new google
+        .maps
+        .LatLng(location.latitude, location.longitude);
 
+      if (geocoder) {
+        geocoder.geocode({
+          'latLng': latLng
+        }, function (results, status) {
+          if (status == google.maps.GeocoderStatus.OK) {
+            console.log(results[0]);
+            $('#pac-input').val(results[0].formatted_address);
+          } else {
+            $('#pac-input').val('Geocoding failed: ' + status);
+            console.log("Geocoding failed: " + status);
+          }
+        }); //geocoder.geocode()
+      }
+    } //showPosition
 
-          <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC95eHImBVWI4SbTc3DD2zruYGcWdI6xD0&libraries=places&callback=initAutocomplete"
-         async defer></script>
-      <script>
-         function initMap(){
-              var latitudeAndLongitude=document.getElementById("latitudeAndLongitude"),
-         location={
-         latitude:'',
-         longitude:''
-         };
-         
-         if (navigator.geolocation){
-         navigator.geolocation.getCurrentPosition(showPosition);
-         }
-         else{
-         latitudeAndLongitude.innerHTML="Geolocation is not supported by this browser.";
-         }
-         }
-         function showPosition(position){ 
-         location.latitude=position.coords.latitude;
-         location.longitude=position.coords.longitude;
-         // latitudeAndLongitude.innerHTML="Latitude: " + position.coords.latitude + 
-         // "<br>Longitude: " + position.coords.longitude; 
-         var geocoder = new google.maps.Geocoder();
-         var latLng = new google.maps.LatLng(location.latitude, location.longitude);
-         
-         if (geocoder) {
-         geocoder.geocode({ 'latLng': latLng}, function (results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-              console.log(results[0]); 
-              $('#pac-input').val(results[0].formatted_address);
-            }
-            else {
-             $('#pac-input').val('Geocoding failed: '+status);
-             console.log("Geocoding failed: " + status);
-            }
-         }); //geocoder.geocode()
-         }      
-         } //showPosition
-           
-      </script>
-   </body>
+    // image preview
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+          $('#blah').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    $("#imgInp").change(function () {
+      $(".image_idv").css("display", "block");
+      readURL(this);
+    });
+  </script>
+</body>
 
 </html>

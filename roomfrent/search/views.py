@@ -20,7 +20,8 @@ from django.views.generic import TemplateView
 import json,pprint
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate, login,logout
-
+from django.contrib.sites.shortcuts import get_current_site
+from django.core.mail import send_mail
 from . import models
 from search.models import *
 from passlib.hash import django_pbkdf2_sha256 as handler
@@ -29,7 +30,7 @@ from random import randint
 import requests
 from django.db import connection
 from django.core import serializers
-import json
+import json,random,string
 
 # google map api
 import googlemaps
@@ -51,20 +52,63 @@ class HomePage(TemplateView):
     def get_context_data(self, * args, ** kwargs):
         context = super(HomePage, self).get_context_data()
         self.request.environ['REMOTE_ADDR']
-        # if  self.request.environ['REMOTE_ADDR'] == '127.0.0.1':
-        #     context['ip'] = '27.255.211.216'
-        # else:
-        #     context['ip'] = self.request.environ['REMOTE_ADDR']
-        # g = GeoIP2()
-        # location_data = g.city(context['ip'])
-        # # city = g.city('106.192.73.120')
-        # context['city'] = location_data['city']
-        # context['country'] = location_data['country_name']
+        # context['user']=self.request.user
+        if self.request.user.is_anonymous:
+            context['user'] = "Guest"
+        else:
+            context['user'] = self.request.user.first_name
+      
+        return context
 
+    def validate_username(request):
+        username = request.GET.get('mobile', None)
+        data = {
+        'is_taken': User.objects.filter(username__iexact=username).exists()
+        }
+        return JsonResponse(data)
+    @csrf_exempt
+    def owner_register(request):
+        password = request.POST.get('password')
+        mobile = request.POST.get('mobile')
+        email = request.POST.get('email')
+        first_name = request.POST.get('name')
+        if request.is_ajax():
+            user=User.objects.create_user(mobile, email, password)
+            user.first_name = first_name
+            user.is_active = False
+            user.save()
+            confirmation_code = ''.join(random.choice(string.ascii_uppercase + string.digits + string.ascii_lowercase) for x in range(33))
+            owner_register = OwnerInfo(user=user)
+            owner_register.owner_mobile=mobile
+            owner_register.confirmation_code = confirmation_code
+            owner_register.save()
+            # user = authenticate(username=mobile, password=password)
+            p=OwnerInfo.objects.get(user=user)
+            current_site = get_current_site(request)
+            content = current_site.domain+"/owner/activate" +  user.username + "/" + str(p.confirmation_code) 
+            send_mail("Email Verify", content, 'no-reply@gsick.com', [user.email], fail_silently=False)
+            data = {'sucess':True,'status':1,'message':'Please confirm your email address to complete the registration'}
 
-        # return context
+            return JsonResponse(data)
+
+    def user_login(request):
+        if request.method == "POST":
+            password = request.POST.get('password')
+            mobile = request.POST.get('mobile')
+            user = authenticate(username=mobile, password=password)
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    data = {'sucess':True,'status':2}
+                    return JsonResponse(data)
+                    # return HttpResponseRedirect("/owner/?own=" + str(user.id))
+                else:
+                    data = {'sucess':True,'status':1,'message':'Please confirm your email address to complete the registration'}
+                    return JsonResponse(data)
+            else:
+                data = {'sucess':True,'status':0,'message':'Invalid password. Please try again'}
+                return JsonResponse(data)
     
-    # 
 
 class SearchResults(TemplateView):
     template_name = "search_results.html"
@@ -76,6 +120,7 @@ class SearchResults(TemplateView):
         context['lat'] = self.request.GET.get('lat')
         context['lng'] = self.request.GET.get('lng')
         context['search_result'] = self.request.GET.get('search')
+
         if self.request.user.is_anonymous:
             context['user'] = "Guest"
         else:
@@ -131,6 +176,3 @@ class SearchResults(TemplateView):
         user_details=OwnerInfo.objects.get(user_id=owner_id)
         user_name=User.objects.get(id=owner_id)
         return JsonResponse({'mobile':user_details.owner_mobile,'owner_name':user_name.first_name})
-    
-
-

@@ -1,3 +1,4 @@
+from django_otp.forms import OTPAuthenticationForm
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.urls import path
@@ -7,12 +8,17 @@ from django.views.static import serve
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.views.generic.base import RedirectView
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
 	url(r'', include('search.urls')),
     # url(r'^siteadmin/', admin.site.urls),
     url(r'^dashboard/', include('search.urls')),
     url(r'^owner/',include('owner.urls')),
+    
+    # url(r'^django_registration/',include('django_registration.urls')),
+    
+    
 #    url(r'^scrap/',include('scrap.urls')),
     url(r'^favicon.ico$',
         RedirectView.as_view( # the redirecting function
@@ -23,5 +29,6 @@ urlpatterns = [
     ),
 
 ]
+
 if settings.DEBUG is True:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

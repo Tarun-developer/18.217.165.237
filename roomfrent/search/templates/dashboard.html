@@ -2,27 +2,24 @@
 <!DOCTYPE html>
 <html>
    <head>
-      
-<title>Room For Rent</title>
-<meta name="Description" content="Lookup for Residential properties for rent in India. ✓0% Brokerage,✓100% Genuine Owners. India's #1 website Without Brokers.">
-<meta name="Keywords" content="room rent apartments for rentrooms for renthouses for rentrooms to renthomes for rentroommate finderstudio apartments for rentrental homesroommatefor rentrental propertiescheap rooms for renthouse sharefind a roomroommate wantedflats to rentsingle room for rentstudios for rentcheap houses for rentroom shareflatsharehouse rentalslooking for a room to rent no">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+      <title>Room For Rent</title>
+      <meta name="Description" content="Lookup for Residential properties for rent in India. ✓0% Brokerage,✓100% Genuine Owners. India's #1 website Without Brokers.">
+      <meta name="Keywords" content="room rent apartments for rentrooms for renthouses for rentrooms to renthomes for rentroommate finderstudio apartments for rentrental homesroommatefor rentrental propertiescheap rooms for renthouse sharefind a roomroommate wantedflats to rentsingle room for rentstudios for rentcheap houses for rentroom shareflatsharehouse rentalslooking for a room to rent no">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="icon" href="{% static 'images/fevi_icon_logo.ico' %}">
       <link rel="stylesheet" type="text/css" href=" {% static 'css/dashboard/style.css' %} ">
       <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
       <link href="{% static '/css/global/bootstrap.min.css' %}" rel="stylesheet" />
       <link rel="shortcut icon" type="image/png" href="favicon.ico"/>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+      <link href="{% static '/css/register.css' %} " rel="stylesheet" />
       <script src="{% static '/js/global/jquery.min.js' %}"></script>
-
       <!-- <link href="{% static '/css/global/selectric.css' %}" rel="stylesheet"> -->
       <link href="{% static '/css/search/style.css' %}" rel="stylesheet">
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
       <title>Room for Rent</title>
-
    </head>
    <body>
-   	         
       <div class="login-page">
          <img src="{% static '/images/logo-small.webp' %}"/>
          <form class="search-bar" action="/dashboard/search_results" method="GET">
@@ -30,7 +27,6 @@
             <input id="pac-input" class="search search_input" type="text" placeholder="Search Box" autofocus required maxlength="50" name="search">
             <input type="hidden" name="lat" id="lat">
             <input type="hidden" name="lng" id="lng">
-
             <span class="search-icon">
             <button class="btn btn-primary " onclick="initMap()"  type="button">
             <i class="fa fa-map-marker">
@@ -39,68 +35,283 @@
             </span>
             <div class="search-btn">  <button type="submit" value="Submit Button" class="button btn btn-primary" id="rental-search">Search
                </button>
-               <button type="button" class="button btn btn-primary" onclick="window.open('/owner/register')" id="feeling-lucky">I'm Owner
+               {% if user == 'Guest' %}
+               <button type="button" class="button btn btn-primary" data-login="{{ user }}" data-toggle="modal" id="login_model" data-target="#modalLRForm">I'm Owner
                </button>
+               {% else %}
+               <button type="button" class="button btn btn-primary" id="loged_user">I'm Owner
+               </button>
+               {% endif %}
             </div>
             <input id="ip_location" type="hidden" value="{{ city }} {{ country }}">
          </form>
       </div>
       <div id="map"></div>
-
       <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC95eHImBVWI4SbTc3DD2zruYGcWdI6xD0&libraries=places&callback=initAutocomplete"
          async defer></script>
       <script language="JavaScript" type="text/javascript" src="{% static '/js/dashboard/dashboard.js' %}"></script>
       <!-- <script src="http://maps.google.com/maps/api/js?sensor=false"></script> -->
       <p id='latitudeAndLongitude'></p>
       <p id='address'></p>
-      <script>
-         function initMap(){
-              var latitudeAndLongitude=document.getElementById("latitudeAndLongitude"),
-         location={
-         latitude:'',
-         longitude:''
-         };
-         
-         if (navigator.geolocation){
-         navigator.geolocation.getCurrentPosition(showPosition);
+      <!--Modal: Login / Register Form-->
+      <div class="modal fade" id="modalLRForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+         <div class="modal-dialog cascading-modal" role="document">
+            <!--Content-->
+            <div class="modal-content">
+               <div class="login-page-model">
+                  {% if messages %}
+                  <ul class="messages">
+                     {% for message in messages %}
+                     <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}
+                     </li>
+                     {% endfor %}
+                  </ul>
+                  {% endif %}
+                  <div class="form">
+                     <form  class="register-form" method="POST">
+                       <div class="alert alert-message" style="display: none;"></div>
+                        {% csrf_token %}
+                        <h3>Sign Up for Free</h3>
+                        <input type="text" required id="id_first_name" name="first_name" placeholder="Name" autocomplete="off" />
+                         <span class="right" style="position: absolute;"></span>
+                        <input type="text" required id="id_mobile" name="moblie" placeholder="Mobile Number" autocomplete="off" />
+                        <input type="text" id="id_email" required pattern="[^ @]*@[^ @]*" name="email" placeholder="E-mail" />
+                        <input type="password" id="id_password" required name="password" placeholder="Password" autocomplete="off" />
+                        <button>create</button>
+                        <div id="loader" style="display: none;">
+                            <div id="shadow" class="loadershadow"></div>
+                            <div id="box" class="loader_box"></div>
+                         </div>
+                        <p class="message"> <b>Already registered? </b><a href="#">Sign In</a></p>
+                     </form>
+                     <form  class="login-form" method="POST">
+                         <div class="alert  alert-message" style="display: none;"></div>
+                        {% csrf_token %}
+                        <h3>Welcome Back!</h3>
+                        <input type="text" id="id_mobile_login" name="moblie" placeholder="Mobile Number" />
+                        <input type="password" id="id_password_login" name="password" placeholder="Password" />
+                        <input type="hidden" name="islogin" value="true" />
+                        <button>login</button>
+                        <div id="loader" style="display: none;">
+                            <div id="shadow" class="loadershadow"></div>
+                            <div id="box" class="loader_box"></div>
+                         </div>
+                        <p class="message">Not registered? <a href="#">Create an account</a></p>
+                         <p class="message">Forget password? <a href="#">Reset password</a></p>
+                     </form>
+                  </div>
+               </div>
+               <script type="text/javascript">
+                  $('.message a').click(function(){
+                   $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+                  });
+               </script>
+            </div>
+            <!--/.Content-->
+         </div>
+      </div>
+
+      <style type="text/css">
+         .pac-container:after {
+         background-image: none !important;
+         height: 0px;
          }
-         else{
-         latitudeAndLongitude.innerHTML="Geolocation is not supported by this browser.";
-         }
-         }
-         function showPosition(position){ 
-         location.latitude=position.coords.latitude;
-         location.longitude=position.coords.longitude;
-          $('#lat').val(location.latitude);
-          $('#lng').val(location.longitude);
-         var geocoder = new google.maps.Geocoder();
-         var latLng = new google.maps.LatLng(location.latitude, location.longitude);
-         // console.log(latLng);
-         
-         if (geocoder) {
-         geocoder.geocode({ 'latLng': latLng}, function (results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-              console.log(results); 
-              $('#pac-input').val(results[0].formatted_address);
+    
+      </style>
+
+{% block javascript %}
+<script>
+    $('.register-form').on('submit', function(event) {
+        event.preventDefault();
+        var form = $(this);
+        var email = $('#id_email').val();
+        var name = $('#id_first_name').val();
+        var password = $('#id_password').val();
+        var mobile = $('#id_mobile').val();
+
+
+        console.log(form.serialize());
+        $.ajax({
+            url: '/ajax/register/',
+            type: "POST",
+            data: {
+                'mobile': mobile,
+                'email': email,
+                'name': name,
+                'password': password
+            },
+            dataType: 'json',
+            success: function(data) {
+               if (data.status == 1) {
+                    $('.alert-message').removeClass("alert-danger alert-info alert-success");
+                    var htmlAlert = "<strong>success!</strong> " + data.message;
+                    $('.alert-message').addClass("flash alert-success");
+                    $('.alert-message').show();
+                    $(".alert-message").html(htmlAlert);
+
+                    $(".flash").first().hide().fadeIn(200).delay(4000).fadeOut(1000, function() {
+                        $(this).hide();
+                    });
+                }
             }
-            else {
-             $('#pac-input').val('Geocoding failed: '+status);
-             console.log("Geocoding failed: " + status);
-            }
-         }); //geocoder.geocode()
-         }      
-         } //showPosition
+        });
+
+    });
+
+    $('.login-form').on('submit', function(event) {
+        event.preventDefault();
+        
+        var mobile = $('#id_mobile_login').val();
+        var password = $('#id_password_login').val();
+        var token = $(".login-form").find('input[name=csrfmiddlewaretoken]').val()
+        $.ajax({
+            url: '/ajax/login/',
+            type: "POST",
            
-      </script>
+            data: {
+                'mobile': mobile,
+                'password': password,
+                'csrfmiddlewaretoken': token
+            },
+            dataType: 'json',
+            success: function(data) {
+                if (data.status == 0) {
+                    $('.alert-message').removeClass("alert-danger alert-info alert-success");
+                    var htmlAlert = "<strong>error!</strong> " + data.message;
+                    $('.alert-message').addClass("flash alert-danger");
+                    $('.alert-message').show();
+                    $(".alert-message").html(htmlAlert);
+
+                    $(".flash").first().hide().fadeIn(200).delay(2000).fadeOut(1000, function() {
+                        $(this).hide();
+                    });
+                }
+                else if (data.status == 2){
+
+                window.location.href = "/owner/";
+                } else {
+                    $('.alert-message').removeClass("alert-danger alert-info ");
+                    var htmlAlert = "<strong>error!</strong> " + data.message;
+                    $('.alert-message').addClass("flash alert-success");
+                    $('.alert-message').show();
+                    $(".alert-message").html(htmlAlert);
+
+                    $(".flash").first().hide().fadeIn(200).delay(2000).fadeOut(1000, function() {
+                        $(this).hide();
+                        
+                    });
+                    location.reload();
+                }
+
+            }
+        });
+    });
+
+
+
+
+    //userame validate
+    $("#id_mobile").change(function() {
+        var mobile = $(this).val();
+        $.ajax({
+            url: '/ajax/validate_username/',
+            data: {
+                'mobile': mobile
+            },
+            dataType: 'json',
+            success: function(data) {
+                if (data.is_taken) {
+                    $('.right').text('✘');
+                    $('.alert-message').removeClass("alert-danger alert-info alert-success");
+
+                    var htmlAlert = "<strong>error!</strong> Mobile is allredy registered";
+                    $('.alert-message').addClass("flash alert-danger");
+                    $('.alert-message').show();
+                    $(".alert-message").html(htmlAlert);
+
+                    $(".flash").first().hide().fadeIn(200).delay(2000).fadeOut(1000, function() {
+                        $(this).hide();
+                    });
+                } else {
+                    if (mobile == '') {
+                        $('.right').text('✘');
+                        $('.alert-message').removeClass("alert-danger alert-info alert-success");
+
+                        var htmlAlert = "<strong>error!</strong> Mobile No can not be blank";
+                        $('.alert-message').addClass("flash alert-danger");
+                        $('.alert-message').show();
+                        $(".alert-message").html(htmlAlert);
+
+                        $(".flash").first().hide().fadeIn(200).delay(2000).fadeOut(1000, function() {
+                            $(this).hide();
+                        });
+                    } else {
+
+                        $('.right').text('✔');
+                        $('.alert-message').removeClass("alert-danger alert-info alert-success");
+                        var htmlAlert = "<strong>info!</strong> Mobile is not registered";
+                        $('.alert-message').addClass("flash alert-info");
+
+
+                        $('.alert-message').show();
+                        $(".alert-message").html(htmlAlert);
+
+                        $(".flash").first().hide().fadeIn(200).delay(2000).fadeOut(1000, function() {
+                            $(this).hide();
+                        });
+                    }
+                }
+            }
+        });
+
+    });
+
+
+    //ignore model if loged in 
+    $('#loged_user').click(function() {
+        window.open('/owner/');
+    });
+
+    function initMap() {
+        var latitudeAndLongitude = document.getElementById("latitudeAndLongitude"),
+            location = {
+                latitude: '',
+                longitude: ''
+            };
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            latitudeAndLongitude.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+
+    function showPosition(position) {
+        location.latitude = position.coords.latitude;
+        location.longitude = position.coords.longitude;
+        $('#lat').val(location.latitude);
+        $('#lng').val(location.longitude);
+        var geocoder = new google.maps.Geocoder();
+        var latLng = new google.maps.LatLng(location.latitude, location.longitude);
+        // console.log(latLng);
+
+        if (geocoder) {
+            geocoder.geocode({
+                'latLng': latLng
+            }, function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    console.log(results);
+                    $('#pac-input').val(results[0].formatted_address);
+                } else {
+                    $('#pac-input').val('Geocoding failed: ' + status);
+                    console.log("Geocoding failed: " + status);
+                }
+            }); //geocoder.geocode()
+        }
+    } //showPosition
+</script>
+{% endblock %}
+
 
    </body>
-</html>
-</body>
-
-<style type="text/css">
-   .pac-container:after {
-    background-image: none !important;
-    height: 0px;
-}
-</style>
 </html>
